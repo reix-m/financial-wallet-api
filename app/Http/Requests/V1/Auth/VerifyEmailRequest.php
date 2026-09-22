@@ -7,7 +7,10 @@ namespace App\Http\Requests\V1\Auth;
 use App\Actions\Auth\VerifyEmail\VerifyEmailInput;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Knuckles\Scribe\Attributes\UrlParam;
 
+#[UrlParam('id', type: 'int', description: 'User id.', required: true, example: 1)]
+#[UrlParam('hash', type: 'string', description: 'Hash of the email.', required: true, example: '2a97f4c2219118fff9108dac87093178959955a2')]
 final class VerifyEmailRequest extends FormRequest
 {
     public function authorize(): bool
@@ -21,7 +24,7 @@ final class VerifyEmailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', 'int', Rule::exists('users', 'id')],
+            'id' => ['required', 'integer', Rule::exists('users', 'id')],
             'hash' => ['required', 'string'],
         ];
     }
