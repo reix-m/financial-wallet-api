@@ -35,10 +35,10 @@ final class AcceptJson
 
     private function hasRequestPayload(Request $request): bool
     {
-        if (! in_array($request->method(), ['POST', 'PUT', 'PATCH', 'DELETE'], true)) {
+        if ( ! in_array($request->method(), ['POST', 'PUT', 'PATCH', 'DELETE'], true)) {
             return false;
         }
 
-        return $request->getContent() !== '' || $request->request->count() > 0;
+        return '' !== $request->getContent() || $request->request->count() > 0;
     }
 }

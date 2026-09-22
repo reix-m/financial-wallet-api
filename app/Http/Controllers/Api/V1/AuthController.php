@@ -14,8 +14,8 @@ use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\Subgroup;
-use Knuckles\Scribe\Attributes\UrlParam;
 use Knuckles\Scribe\Attributes\Unauthenticated;
+use Knuckles\Scribe\Attributes\UrlParam;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 #[Group(name: 'Auth')]

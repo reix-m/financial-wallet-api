@@ -15,7 +15,7 @@ final class Register
         $user = User::create([
             'name' => $input->name,
             'email' => $input->email,
-            'password' => $input->password
+            'password' => $input->password,
         ]);
         [$token, $expiresAt] = $this->issueToken($user);
 
