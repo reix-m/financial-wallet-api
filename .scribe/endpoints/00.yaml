@@ -1,0 +1,173 @@
+name: Auth
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/auth/register
+    metadata:
+      custom: []
+      groupName: Auth
+      groupDescription: ''
+      subgroup: Authentication
+      subgroupDescription: ''
+      title: Register
+      description: 'Create a new account.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: ''
+        required: true
+        example: 'Foo Bar'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: ''
+        required: true
+        example: foo.bar@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: ''
+        required: true
+        example: StrongP@ss123
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Foo Bar'
+      email: foo.bar@example.com
+      password: StrongP@ss123
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"user":{"id":1,"name":"Foo Bar","email":"foo.bar@example.com"},"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}'
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 422
+        content: '{"message":"The given data was invalid.","errors":{"email":["The email has already been taken."]}}'
+        headers: []
+        description: 'Validation failed'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/auth/email/verify/{id}/{hash}'
+    metadata:
+      custom: []
+      groupName: Auth
+      groupDescription: ''
+      subgroup: 'Email Verification'
+      subgroupDescription: ''
+      title: 'Verify Email'
+      description: 'Verify user account.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'User id.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      hash:
+        custom: []
+        name: hash
+        description: 'Hash of the email.'
+        required: true
+        example: 09ecbb063009fa722b45a126374dee89d060e54b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      hash: 09ecbb063009fa722b45a126374dee89d060e54b
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      id:
+        custom: []
+        name: id
+        description: 'Must match an existing stored value.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      hash:
+        custom: []
+        name: hash
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      id: 16
+      hash: architecto
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: '[]'
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 403
+        content: '{"message":"Verification failed."}'
+        headers: []
+        description: 'Invalid signed url'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
