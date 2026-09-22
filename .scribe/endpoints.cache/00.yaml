@@ -29,7 +29,7 @@ endpoints:
       name:
         custom: []
         name: name
-        description: ''
+        description: 'User name. Must not be greater than 255 characters.'
         required: true
         example: 'Foo Bar'
         type: string
@@ -40,7 +40,7 @@ endpoints:
       email:
         custom: []
         name: email
-        description: ''
+        description: 'User email address. Must be a valid email address. Must not be greater than 320 characters.'
         required: true
         example: foo.bar@example.com
         type: string
@@ -51,7 +51,7 @@ endpoints:
       password:
         custom: []
         name: password
-        description: ''
+        description: 'User password.'
         required: true
         example: StrongP@ss123
         type: string
@@ -117,7 +117,7 @@ endpoints:
         name: hash
         description: 'Hash of the email.'
         required: true
-        example: 09ecbb063009fa722b45a126374dee89d060e54b
+        example: 2a97f4c2219118fff9108dac87093178959955a2
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -125,7 +125,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       id: 1
-      hash: 09ecbb063009fa722b45a126374dee89d060e54b
+      hash: 2a97f4c2219118fff9108dac87093178959955a2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -168,6 +168,73 @@ endpoints:
         content: '{"message":"Verification failed."}'
         headers: []
         description: 'Invalid signed url'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/auth/login
+    metadata:
+      custom: []
+      groupName: Auth
+      groupDescription: ''
+      subgroup: Authentication
+      subgroupDescription: ''
+      title: Login
+      description: 'Send valid username and password and receive a token.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        custom: []
+        name: email
+        description: 'User email address. Must be a valid email address. Must not be greater than 320 characters.'
+        required: true
+        example: foo.bar@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'User password.'
+        required: true
+        example: StrongP@ss123
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      email: foo.bar@example.com
+      password: StrongP@ss123
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"user":{"id":1,"name":"Foo Bar","email":"foo.bar@example.com"},"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}'
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Invalid credentials."}'
+        headers: []
+        description: 'Validation failed'
     responseFields: []
     auth: []
     controller: null

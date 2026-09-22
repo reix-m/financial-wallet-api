@@ -78,6 +78,9 @@
                                                                             <li class="tocify-item level-3" data-unique="auth-POSTapi-v1-auth-register">
                                             <a href="#auth-POSTapi-v1-auth-register">Register</a>
                                         </li>
+                                                                            <li class="tocify-item level-3" data-unique="auth-POSTapi-v1-auth-login">
+                                            <a href="#auth-POSTapi-v1-auth-login">Login</a>
+                                        </li>
                                                                     </ul>
                                                                                 <li class="tocify-item level-2" data-unique="auth-email-verification">
                                 <a href="#auth-email-verification">Email Verification</a>
@@ -285,7 +288,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="Foo Bar"
                data-component="body">
     <br>
-<p>Example: <code>Foo Bar</code></p>
+<p>User name. Must not be greater than 255 characters. Example: <code>Foo Bar</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -297,7 +300,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="foo.bar@example.com"
                data-component="body">
     <br>
-<p>Example: <code>foo.bar@example.com</code></p>
+<p>User email address. Must be a valid email address. Must not be greater than 320 characters. Example: <code>foo.bar@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -309,7 +312,178 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="StrongP@ss123"
                data-component="body">
     <br>
-<p>Example: <code>StrongP@ss123</code></p>
+<p>User password. Example: <code>StrongP@ss123</code></p>
+        </div>
+        </form>
+
+                    <h2 id="auth-POSTapi-v1-auth-login">Login</h2>
+
+<p>
+</p>
+
+<p>Send valid username and password and receive a token.</p>
+
+<span id="example-requests-POSTapi-v1-auth-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/v1/auth/login" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"foo.bar@example.com\",
+    \"password\": \"StrongP@ss123\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/auth/login"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "foo.bar@example.com",
+    "password": "StrongP@ss123"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-auth-login">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;user&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Foo Bar&quot;,
+        &quot;email&quot;: &quot;foo.bar@example.com&quot;
+    },
+    &quot;access_token&quot;: &quot;2|example-token&quot;,
+    &quot;token_type&quot;: &quot;Bearer&quot;,
+    &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Validation failed):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Invalid credentials.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-auth-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-auth-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-login"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-auth-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-auth-login">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-auth-login" data-method="POST"
+      data-path="api/v1/auth/login"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-auth-login"
+                    onclick="tryItOut('POSTapi-v1-auth-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-auth-login"
+                    onclick="cancelTryOut('POSTapi-v1-auth-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-auth-login"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/auth/login</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-auth-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-auth-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-auth-login"
+               value="foo.bar@example.com"
+               data-component="body">
+    <br>
+<p>User email address. Must be a valid email address. Must not be greater than 320 characters. Example: <code>foo.bar@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-auth-login"
+               value="StrongP@ss123"
+               data-component="body">
+    <br>
+<p>User password. Example: <code>StrongP@ss123</code></p>
         </div>
         </form>
 
@@ -327,7 +501,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/auth/email/verify/1/09ecbb063009fa722b45a126374dee89d060e54b" \
+    --get "http://localhost:8000/api/v1/auth/email/verify/1/2a97f4c2219118fff9108dac87093178959955a2" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -339,7 +513,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/auth/email/verify/1/09ecbb063009fa722b45a126374dee89d060e54b"
+    "http://localhost:8000/api/v1/auth/email/verify/1/2a97f4c2219118fff9108dac87093178959955a2"
 );
 
 const headers = {
@@ -468,10 +642,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="hash"                data-endpoint="GETapi-v1-auth-email-verify--id---hash-"
-               value="09ecbb063009fa722b45a126374dee89d060e54b"
+               value="2a97f4c2219118fff9108dac87093178959955a2"
                data-component="url">
     <br>
-<p>Hash of the email. Example: <code>09ecbb063009fa722b45a126374dee89d060e54b</code></p>
+<p>Hash of the email. Example: <code>2a97f4c2219118fff9108dac87093178959955a2</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
