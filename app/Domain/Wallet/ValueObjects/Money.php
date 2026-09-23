@@ -27,4 +27,14 @@ final readonly class Money
     {
         return $this->cents;
     }
+
+    public function toFloat(): float
+    {
+        return $this->cents / 100;
+    }
+
+    public function formatted(string $currencySymbol = 'R$'): string
+    {
+        return sprintf('%s %s', $currencySymbol, number_format($this->toFloat(), 2, ',', '.'));
+    }
 }
