@@ -40,6 +40,15 @@ final class Wallet
         );
     }
 
+    public function deposit(Money $amount): void
+    {
+        if ( ! $amount->isPositive()) {
+            throw new InvalidArgumentException('The deposit amount should be greater than zero.');
+        }
+
+        $this->balance = $this->balance->add($amount);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
