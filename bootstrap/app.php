@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Domain\Wallet\Exceptions\CannotTransferToSelfException;
+use App\Domain\Wallet\Exceptions\InsufficientBalanceException;
 use App\Domain\Wallet\Exceptions\InvalidTransactionAmountException;
 use App\Domain\Wallet\Exceptions\WalletDomainException;
 use App\Domain\Wallet\Exceptions\WalletNotFoundException;
@@ -128,6 +130,8 @@ return Application::configure(basePath: dirname(__DIR__))
             $statusCode = match (true) {
                 $exception instanceof WalletNotFoundException => Response::HTTP_NOT_FOUND,
                 $exception instanceof InvalidTransactionAmountException => Response::HTTP_UNPROCESSABLE_ENTITY,
+                $exception instanceof CannotTransferToSelfException => Response::HTTP_UNPROCESSABLE_ENTITY,
+                $exception instanceof InsufficientBalanceException => Response::HTTP_UNPROCESSABLE_ENTITY,
                 default => Response::HTTP_BAD_REQUEST,
             };
 
