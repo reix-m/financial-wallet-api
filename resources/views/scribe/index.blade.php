@@ -214,9 +214,9 @@ fetch(url, {
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
             &quot;email&quot;: &quot;urias.erik@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T22:52:12.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T23:04:48.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;
         }
     },
     &quot;meta&quot;: {
@@ -410,9 +410,9 @@ fetch(url, {
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
             &quot;email&quot;: &quot;elaine.carvalho@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T22:52:12.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T23:04:48.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;
         }
     },
     &quot;meta&quot;: {
@@ -582,9 +582,9 @@ fetch(url, {
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Rodrigo Leon&quot;,
             &quot;email&quot;: &quot;estrada.livia@example.com&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T22:52:12.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T23:04:48.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;
         }
     }
 }</code>
@@ -922,13 +922,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;type&quot;: &quot;wallets&quot;,
         &quot;id&quot;: &quot;1&quot;,
-        &quot;attributes&quot;: {
-            &quot;code&quot;: &quot;123456&quot;,
-            &quot;balance&quot;: &quot;R$ 0,00&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
-        }
+        &quot;code&quot;: &quot;123456&quot;,
+        &quot;balance&quot;: &quot;R$ 0,00&quot;,
+        &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
     }
 }</code>
  </pre>
@@ -1091,13 +1088,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;type&quot;: &quot;wallets&quot;,
         &quot;id&quot;: &quot;1&quot;,
-        &quot;attributes&quot;: {
-            &quot;code&quot;: &quot;123456&quot;,
-            &quot;balance&quot;: &quot;R$ 1,00&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
-        }
+        &quot;code&quot;: &quot;123456&quot;,
+        &quot;balance&quot;: &quot;R$ 1,00&quot;,
+        &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
     }
 }</code>
  </pre>
@@ -1284,13 +1278,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;type&quot;: &quot;wallets&quot;,
         &quot;id&quot;: &quot;1&quot;,
-        &quot;attributes&quot;: {
-            &quot;code&quot;: &quot;123456&quot;,
-            &quot;balance&quot;: &quot;R$ 1,00&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
-        }
+        &quot;code&quot;: &quot;123456&quot;,
+        &quot;balance&quot;: &quot;R$ 1,00&quot;,
+        &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
     }
 }</code>
  </pre>
@@ -1479,13 +1470,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;type&quot;: &quot;wallets&quot;,
         &quot;id&quot;: &quot;1&quot;,
-        &quot;attributes&quot;: {
-            &quot;code&quot;: &quot;123456&quot;,
-            &quot;balance&quot;: &quot;R$ 1,00&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
-        }
+        &quot;code&quot;: &quot;123456&quot;,
+        &quot;balance&quot;: &quot;R$ 1,00&quot;,
+        &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
     }
 }</code>
  </pre>
@@ -1668,7 +1656,7 @@ fetch(url, {
                 &quot;value&quot;: &quot;completed&quot;,
                 &quot;label&quot;: &quot;Realizada&quot;
             },
-            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
             &quot;counterparty&quot;: {
                 &quot;id&quot;: &quot;5&quot;,
                 &quot;code&quot;: &quot;106432&quot;,
@@ -1688,7 +1676,7 @@ fetch(url, {
                 &quot;value&quot;: &quot;completed&quot;,
                 &quot;label&quot;: &quot;Realizada&quot;
             },
-            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
             &quot;counterparty&quot;: {
                 &quot;id&quot;: &quot;8&quot;,
                 &quot;code&quot;: &quot;389368&quot;,

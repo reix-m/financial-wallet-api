@@ -6,32 +6,20 @@ namespace App\Http\Resources\V1;
 
 use App\Domain\Wallet\Wallet;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\JsonApi\JsonApiResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-final class WalletResource extends JsonApiResource
+final class WalletResource extends JsonResource
 {
-    public function toId(Request $request): string
-    {
-        /** @var Wallet $wallet */
-        $wallet = $this->resource;
-
-        return (string) $wallet->getId();
-    }
-
-    public function toType(Request $request): string
-    {
-        return 'wallets';
-    }
-
     /**
      * @return array<string, mixed>
      */
-    public function toAttributes(Request $request): array
+    public function toArray(Request $request): array
     {
         /** @var Wallet $wallet */
         $wallet = $this->resource;
 
         return [
+            'id' => $wallet->getId(),
             'code' => $wallet->getCode()->getValue(),
             'balance' => $wallet->getBalance()->formatted(),
             'created_at' => $wallet->getCreatedAt()->toAtomString(),

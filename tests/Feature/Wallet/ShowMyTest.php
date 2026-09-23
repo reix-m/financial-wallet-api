@@ -34,6 +34,6 @@ it('can show when exists', function (): void {
     $this->withToken($token)
         ->getJson('/api/v1/wallets/my')
         ->assertOk()
-        ->assertJsonPath('data.attributes.code', $wallet->code)
-        ->assertJsonPath('data.attributes.balance', 'R$ 200,00');
+        ->assertJsonPath('data.code', $wallet->code)
+        ->assertJsonPath('data.balance', 'R$ 200,00');
 });

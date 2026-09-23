@@ -34,6 +34,6 @@ it('can deposit with valid amount', function (): void {
     $this->withToken($token)
         ->postJson('/api/v1/wallets/deposit', ['amount' => $amount])
         ->assertOk()
-        ->assertJsonPath('data.attributes.code', $wallet->code)
-        ->assertJsonPath('data.attributes.balance', 'R$ 200,00');
+        ->assertJsonPath('data.code', $wallet->code)
+        ->assertJsonPath('data.balance', 'R$ 200,00');
 });
