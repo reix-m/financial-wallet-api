@@ -7,7 +7,9 @@ namespace App\Http\Controllers\Api\V1;
 use App\Actions\Wallet\CreateWallet\CreateWallet;
 use App\Actions\Wallet\CreateWallet\CreateWalletInput;
 use App\Actions\Wallet\Deposit\Deposit;
+use App\Actions\Wallet\Transfer\Transfer;
 use App\Http\Requests\V1\Wallet\DepositRequest;
+use App\Http\Requests\V1\Wallet\TransferRequest;
 use App\Http\Resources\V1\WalletResource;
 use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -69,6 +71,14 @@ final class WalletController
     {
         $input = $request->toInput(userId: $user->id);
         $result =  $deposit->execute($input);
+
+        return WalletResource::make($result)->response()->setStatusCode(SymfonyResponse::HTTP_OK);
+    }
+
+    public function transfer(TransferRequest $request, #[CurrentUser] User $user, Transfer $transfer): JsonResponse
+    {
+        $input = $request->toInput(userId: $user->id);
+        $result =  $transfer->execute($input);
 
         return WalletResource::make($result)->response()->setStatusCode(SymfonyResponse::HTTP_OK);
     }
