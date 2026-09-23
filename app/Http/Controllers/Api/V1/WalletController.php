@@ -75,6 +75,22 @@ final class WalletController
         return WalletResource::make($result)->response()->setStatusCode(SymfonyResponse::HTTP_OK);
     }
 
+    #[Endpoint(title: 'Transfer', description: 'Transfer a amount to another wallet.')]
+    #[Response(
+        status: SymfonyResponse::HTTP_OK,
+        description: 'Success.',
+        content: [
+            'data' => [
+                'type' => 'wallets',
+                'id' => '1',
+                'attributes' => [
+                    'code' => '123456',
+                    'balance' => 'R$ 1,00',
+                    'created_at' => '2026-09-23T14:00:00+00:00',
+                ],
+            ],
+        ],
+    )]
     public function transfer(TransferRequest $request, #[CurrentUser] User $user, Transfer $transfer): JsonResponse
     {
         $input = $request->toInput(userId: $user->id);

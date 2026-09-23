@@ -106,6 +106,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="wallet-POSTapi-v1-wallets-deposit">
                                 <a href="#wallet-POSTapi-v1-wallets-deposit">Deposit</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="wallet-POSTapi-v1-wallets-transfer">
+                                <a href="#wallet-POSTapi-v1-wallets-transfer">Transfer</a>
+                            </li>
                                                                         </ul>
                             </ul>
             </div>
@@ -200,14 +203,14 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;2&quot;,
+        &quot;id&quot;: &quot;3&quot;,
         &quot;type&quot;: &quot;users&quot;,
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
             &quot;email&quot;: &quot;urias.erik@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T19:29:47.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T19:29:47+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T19:29:47+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T20:35:18.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;
         }
     },
     &quot;meta&quot;: {
@@ -396,14 +399,14 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;2&quot;,
+        &quot;id&quot;: &quot;3&quot;,
         &quot;type&quot;: &quot;users&quot;,
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
             &quot;email&quot;: &quot;elaine.carvalho@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T19:29:47.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T19:29:47+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T19:29:47+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T20:35:18.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;
         }
     },
     &quot;meta&quot;: {
@@ -568,14 +571,14 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;2&quot;,
+        &quot;id&quot;: &quot;3&quot;,
         &quot;type&quot;: &quot;users&quot;,
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Rodrigo Leon&quot;,
             &quot;email&quot;: &quot;estrada.livia@example.com&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T19:29:47.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T19:29:47+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T19:29:47+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T20:35:18.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;
         }
     }
 }</code>
@@ -1206,6 +1209,202 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Amount to deposit. Example: <code>132500</code></p>
+        </div>
+        </form>
+
+                    <h2 id="wallet-POSTapi-v1-wallets-transfer">Transfer</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Transfer a amount to another wallet.</p>
+
+<span id="example-requests-POSTapi-v1-wallets-transfer">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/v1/wallets/transfer" \
+    --header "Authorization: Bearer {YOUR_ACCESS_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"target_account_code\": \"213431\",
+    \"amount\": 132500
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/wallets/transfer"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_ACCESS_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "target_account_code": "213431",
+    "amount": 132500
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-wallets-transfer">
+            <blockquote>
+            <p>Example response (200, Success.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;type&quot;: &quot;wallets&quot;,
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;attributes&quot;: {
+            &quot;code&quot;: &quot;123456&quot;,
+            &quot;balance&quot;: &quot;R$ 1,00&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Email is not verified.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Your email address is not verified.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-wallets-transfer" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-wallets-transfer"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-wallets-transfer"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-wallets-transfer" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-wallets-transfer">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-wallets-transfer" data-method="POST"
+      data-path="api/v1/wallets/transfer"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-wallets-transfer', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-wallets-transfer"
+                    onclick="tryItOut('POSTapi-v1-wallets-transfer');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-wallets-transfer"
+                    onclick="cancelTryOut('POSTapi-v1-wallets-transfer');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-wallets-transfer"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/wallets/transfer</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-wallets-transfer"
+               value="Bearer {YOUR_ACCESS_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_ACCESS_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-wallets-transfer"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-wallets-transfer"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>target_account_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="target_account_code"                data-endpoint="POSTapi-v1-wallets-transfer"
+               value="213431"
+               data-component="body">
+    <br>
+<p>Target account to send transfer. Example: <code>213431</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="amount"                data-endpoint="POSTapi-v1-wallets-transfer"
+               value="132500"
+               data-component="body">
+    <br>
+<p>Amount to transfer. Example: <code>132500</code></p>
         </div>
         </form>
 

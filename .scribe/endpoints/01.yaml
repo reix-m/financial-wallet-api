@@ -119,3 +119,80 @@ endpoints:
     controller: null
     method: null
     route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/wallets/transfer
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: Transfer
+      description: 'Transfer a amount to another wallet.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      target_account_code:
+        custom: []
+        name: target_account_code
+        description: 'Target account to send transfer.'
+        required: true
+        example: '213431'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      amount:
+        custom: []
+        name: amount
+        description: 'Amount to transfer.'
+        required: true
+        example: 132500
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      target_account_code: '213431'
+      amount: 132500
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"type":"wallets","id":"1","attributes":{"code":"123456","balance":"R$ 1,00","created_at":"2026-09-23T14:00:00+00:00"}}}'
+        headers: []
+        description: Success.
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
