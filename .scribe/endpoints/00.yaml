@@ -66,7 +66,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Sra. Malena Molina","email":"urias.erik@example.org","email_verified_at":"2026-09-23T20:35:18.000000Z","created_at":"2026-09-23T20:35:18+00:00","updated_at":"2026-09-23T20:35:18+00:00"}},"meta":{"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}}'
+        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Sra. Malena Molina","email":"urias.erik@example.org","email_verified_at":"2026-09-23T22:52:12.000000Z","created_at":"2026-09-23T22:52:12+00:00","updated_at":"2026-09-23T22:52:12+00:00"}},"meta":{"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}}'
         headers: []
         description: Success
       -
@@ -224,7 +224,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Sra. Malena Molina","email":"elaine.carvalho@example.org","email_verified_at":"2026-09-23T20:35:18.000000Z","created_at":"2026-09-23T20:35:18+00:00","updated_at":"2026-09-23T20:35:18+00:00"}},"meta":{"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}}'
+        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Sra. Malena Molina","email":"elaine.carvalho@example.org","email_verified_at":"2026-09-23T22:52:12.000000Z","created_at":"2026-09-23T22:52:12+00:00","updated_at":"2026-09-23T22:52:12+00:00"}},"meta":{"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}}'
         headers: []
         description: Success
       -
@@ -268,7 +268,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Rodrigo Leon","email":"estrada.livia@example.com","email_verified_at":"2026-09-23T20:35:18.000000Z","created_at":"2026-09-23T20:35:18+00:00","updated_at":"2026-09-23T20:35:18+00:00"}}}'
+        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Rodrigo Leon","email":"estrada.livia@example.com","email_verified_at":"2026-09-23T22:52:12.000000Z","created_at":"2026-09-23T22:52:12+00:00","updated_at":"2026-09-23T22:52:12+00:00"}}}'
         headers: []
         description: 'Authenticated user.'
       -

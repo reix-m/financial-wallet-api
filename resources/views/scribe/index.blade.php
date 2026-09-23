@@ -109,6 +109,12 @@
                                                                                 <li class="tocify-item level-2" data-unique="wallet-POSTapi-v1-wallets-transfer">
                                 <a href="#wallet-POSTapi-v1-wallets-transfer">Transfer</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="wallet-GETapi-v1-wallets-my">
+                                <a href="#wallet-GETapi-v1-wallets-my">Show My</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="wallet-GETapi-v1-wallets-transactions">
+                                <a href="#wallet-GETapi-v1-wallets-transactions">List Transactions</a>
+                            </li>
                                                                         </ul>
                             </ul>
             </div>
@@ -208,9 +214,9 @@ fetch(url, {
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
             &quot;email&quot;: &quot;urias.erik@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T20:35:18.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T22:52:12.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;
         }
     },
     &quot;meta&quot;: {
@@ -404,9 +410,9 @@ fetch(url, {
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
             &quot;email&quot;: &quot;elaine.carvalho@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T20:35:18.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T22:52:12.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;
         }
     },
     &quot;meta&quot;: {
@@ -576,9 +582,9 @@ fetch(url, {
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Rodrigo Leon&quot;,
             &quot;email&quot;: &quot;estrada.livia@example.com&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T20:35:18.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T20:35:18+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T22:52:12.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;
         }
     }
 }</code>
@@ -1113,6 +1119,15 @@ fetch(url, {
     &quot;message&quot;: &quot;Your email address is not verified.&quot;
 }</code>
  </pre>
+            <blockquote>
+            <p>Example response (404, Wallet was not found.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The wallet was not found.&quot;
+}</code>
+ </pre>
     </span>
 <span id="execution-results-POSTapi-v1-wallets-deposit" hidden>
     <blockquote>Received response<span
@@ -1297,6 +1312,15 @@ fetch(url, {
     &quot;message&quot;: &quot;Your email address is not verified.&quot;
 }</code>
  </pre>
+            <blockquote>
+            <p>Example response (404, Wallet was not found.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The wallet was not found.&quot;
+}</code>
+ </pre>
     </span>
 <span id="execution-results-POSTapi-v1-wallets-transfer" hidden>
     <blockquote>Received response<span
@@ -1407,6 +1431,433 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Amount to transfer. Example: <code>132500</code></p>
         </div>
         </form>
+
+                    <h2 id="wallet-GETapi-v1-wallets-my">Show My</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Show my wallet information.</p>
+
+<span id="example-requests-GETapi-v1-wallets-my">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/v1/wallets/my" \
+    --header "Authorization: Bearer {YOUR_ACCESS_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/wallets/my"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_ACCESS_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-wallets-my">
+            <blockquote>
+            <p>Example response (200, Success.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;type&quot;: &quot;wallets&quot;,
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;attributes&quot;: {
+            &quot;code&quot;: &quot;123456&quot;,
+            &quot;balance&quot;: &quot;R$ 1,00&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T14:00:00+00:00&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Email is not verified.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Your email address is not verified.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Wallet was not found.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The wallet was not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-wallets-my" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-wallets-my"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-wallets-my"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-wallets-my" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-wallets-my">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-wallets-my" data-method="GET"
+      data-path="api/v1/wallets/my"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-wallets-my', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-wallets-my"
+                    onclick="tryItOut('GETapi-v1-wallets-my');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-wallets-my"
+                    onclick="cancelTryOut('GETapi-v1-wallets-my');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-wallets-my"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/wallets/my</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-wallets-my"
+               value="Bearer {YOUR_ACCESS_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_ACCESS_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-wallets-my"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-wallets-my"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="wallet-GETapi-v1-wallets-transactions">List Transactions</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>List your wallet transactions.</p>
+
+<span id="example-requests-GETapi-v1-wallets-transactions">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/v1/wallets/transactions?per_page=15" \
+    --header "Authorization: Bearer {YOUR_ACCESS_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/wallets/transactions"
+);
+
+const params = {
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_ACCESS_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-wallets-transactions">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;16&quot;,
+            &quot;type&quot;: {
+                &quot;value&quot;: &quot;deposit&quot;,
+                &quot;label&quot;: &quot;Dep&oacute;sito&quot;
+            },
+            &quot;is_credit&quot;: true,
+            &quot;amount&quot;: 10000,
+            &quot;formatted_amount&quot;: &quot;R$ 100,00&quot;,
+            &quot;status&quot;: {
+                &quot;value&quot;: &quot;completed&quot;,
+                &quot;label&quot;: &quot;Realizada&quot;
+            },
+            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
+            &quot;counterparty&quot;: {
+                &quot;id&quot;: &quot;5&quot;,
+                &quot;code&quot;: &quot;106432&quot;,
+                &quot;user_name&quot;: &quot;Dr. Martinho da Rosa&quot;
+            }
+        },
+        {
+            &quot;id&quot;: &quot;18&quot;,
+            &quot;type&quot;: {
+                &quot;value&quot;: &quot;deposit&quot;,
+                &quot;label&quot;: &quot;Dep&oacute;sito&quot;
+            },
+            &quot;is_credit&quot;: true,
+            &quot;amount&quot;: 10000,
+            &quot;formatted_amount&quot;: &quot;R$ 100,00&quot;,
+            &quot;status&quot;: {
+                &quot;value&quot;: &quot;completed&quot;,
+                &quot;label&quot;: &quot;Realizada&quot;
+            },
+            &quot;created_at&quot;: &quot;2026-09-23T22:52:12+00:00&quot;,
+            &quot;counterparty&quot;: {
+                &quot;id&quot;: &quot;8&quot;,
+                &quot;code&quot;: &quot;389368&quot;,
+                &quot;user_name&quot;: &quot;Hor&aacute;cio Breno Padilha&quot;
+            }
+        }
+    ],
+    &quot;links&quot;: {
+        &quot;first&quot;: &quot;/?page=1&quot;,
+        &quot;last&quot;: &quot;/?page=1&quot;,
+        &quot;prev&quot;: null,
+        &quot;next&quot;: null
+    },
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;from&quot;: 1,
+        &quot;last_page&quot;: 1,
+        &quot;links&quot;: [
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
+                &quot;page&quot;: null,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;/?page=1&quot;,
+                &quot;label&quot;: &quot;1&quot;,
+                &quot;page&quot;: 1,
+                &quot;active&quot;: true
+            },
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
+                &quot;page&quot;: null,
+                &quot;active&quot;: false
+            }
+        ],
+        &quot;path&quot;: &quot;/&quot;,
+        &quot;per_page&quot;: 15,
+        &quot;to&quot;: 2,
+        &quot;total&quot;: 2
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Email is not verified.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Your email address is not verified.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Wallet was not found.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The wallet was not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-wallets-transactions" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-wallets-transactions"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-wallets-transactions"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-wallets-transactions" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-wallets-transactions">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-wallets-transactions" data-method="GET"
+      data-path="api/v1/wallets/transactions"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-wallets-transactions', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-wallets-transactions"
+                    onclick="tryItOut('GETapi-v1-wallets-transactions');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-wallets-transactions"
+                    onclick="cancelTryOut('GETapi-v1-wallets-transactions');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-wallets-transactions"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/wallets/transactions</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-wallets-transactions"
+               value="Bearer {YOUR_ACCESS_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_ACCESS_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-wallets-transactions"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-wallets-transactions"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-wallets-transactions"
+               value="15"
+               data-component="query">
+    <br>
+<p>Transactions per page. Example: <code>15</code></p>
+            </div>
+                </form>
 
             
 

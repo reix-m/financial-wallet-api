@@ -111,6 +111,12 @@ endpoints:
         content: '{"message":"Your email address is not verified."}'
         headers: []
         description: 'Email is not verified.'
+      -
+        custom: []
+        status: 404
+        content: '{"message":"The wallet was not found."}'
+        headers: []
+        description: 'Wallet was not found.'
     responseFields: []
     auth:
       - headers
@@ -188,6 +194,142 @@ endpoints:
         content: '{"message":"Your email address is not verified."}'
         headers: []
         description: 'Email is not verified.'
+      -
+        custom: []
+        status: 404
+        content: '{"message":"The wallet was not found."}'
+        headers: []
+        description: 'Wallet was not found.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/wallets/my
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show My'
+      description: 'Show my wallet information.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"type":"wallets","id":"1","attributes":{"code":"123456","balance":"R$ 1,00","created_at":"2026-09-23T14:00:00+00:00"}}}'
+        headers: []
+        description: Success.
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+      -
+        custom: []
+        status: 404
+        content: '{"message":"The wallet was not found."}'
+        headers: []
+        description: 'Wallet was not found.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/wallets/transactions
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List Transactions'
+      description: 'List your wallet transactions.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      per_page:
+        custom: []
+        name: per_page
+        description: 'Transactions per page.'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanQueryParameters:
+      per_page: 15
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":"16","type":{"value":"deposit","label":"Dep\u00f3sito"},"is_credit":true,"amount":10000,"formatted_amount":"R$ 100,00","status":{"value":"completed","label":"Realizada"},"created_at":"2026-09-23T22:52:12+00:00","counterparty":{"id":"5","code":"106432","user_name":"Dr. Martinho da Rosa"}},{"id":"18","type":{"value":"deposit","label":"Dep\u00f3sito"},"is_credit":true,"amount":10000,"formatted_amount":"R$ 100,00","status":{"value":"completed","label":"Realizada"},"created_at":"2026-09-23T22:52:12+00:00","counterparty":{"id":"8","code":"389368","user_name":"Hor\u00e1cio Breno Padilha"}}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+      -
+        custom: []
+        status: 404
+        content: '{"message":"The wallet was not found."}'
+        headers: []
+        description: 'Wallet was not found.'
     responseFields: []
     auth:
       - headers
