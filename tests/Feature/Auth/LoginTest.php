@@ -43,10 +43,10 @@ it('can authenticate with valid email and password', function (): void {
     $response
         ->assertOk()
         ->assertJsonStructure([
-            'data' => ['attributes' => ['name', 'email', 'email_verified_at', 'created_at', 'updated_at'], 'id', 'type'],
-            'meta' => ['access_token', 'token_type', 'expires_at'],
+            'data' => ['id', 'name', 'email', 'email_verified_at', 'created_at', 'updated_at'],
+            'access_token', 'token_type', 'expires_at',
         ])
-        ->assertJsonPath('meta.token_type', 'Bearer')
-        ->assertJsonPath('data.attributes.email', 'foo.bar@example.com');
+        ->assertJsonPath('token_type', 'Bearer')
+        ->assertJsonPath('data.email', 'foo.bar@example.com');
 
 });

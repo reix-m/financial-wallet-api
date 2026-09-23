@@ -209,21 +209,16 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;3&quot;,
-        &quot;type&quot;: &quot;users&quot;,
-        &quot;attributes&quot;: {
-            &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
-            &quot;email&quot;: &quot;urias.erik@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T23:04:48.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;
-        }
+        &quot;id&quot;: 3,
+        &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
+        &quot;email&quot;: &quot;urias.erik@example.org&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-09-23T23:12:50.000000Z&quot;,
+        &quot;created_at&quot;: &quot;2026-09-23T23:12:50+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-09-23T23:12:50+00:00&quot;
     },
-    &quot;meta&quot;: {
-        &quot;access_token&quot;: &quot;2|example-token&quot;,
-        &quot;token_type&quot;: &quot;Bearer&quot;,
-        &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
-    }
+    &quot;access_token&quot;: &quot;2|example-token&quot;,
+    &quot;token_type&quot;: &quot;Bearer&quot;,
+    &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
 }</code>
  </pre>
             <blockquote>
@@ -405,21 +400,16 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;3&quot;,
-        &quot;type&quot;: &quot;users&quot;,
-        &quot;attributes&quot;: {
-            &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
-            &quot;email&quot;: &quot;elaine.carvalho@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T23:04:48.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;
-        }
+        &quot;id&quot;: 3,
+        &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
+        &quot;email&quot;: &quot;elaine.carvalho@example.org&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-09-23T23:12:50.000000Z&quot;,
+        &quot;created_at&quot;: &quot;2026-09-23T23:12:50+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-09-23T23:12:50+00:00&quot;
     },
-    &quot;meta&quot;: {
-        &quot;access_token&quot;: &quot;2|example-token&quot;,
-        &quot;token_type&quot;: &quot;Bearer&quot;,
-        &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
-    }
+    &quot;access_token&quot;: &quot;2|example-token&quot;,
+    &quot;token_type&quot;: &quot;Bearer&quot;,
+    &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
 }</code>
  </pre>
             <blockquote>
@@ -577,15 +567,12 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;3&quot;,
-        &quot;type&quot;: &quot;users&quot;,
-        &quot;attributes&quot;: {
-            &quot;name&quot;: &quot;Rodrigo Leon&quot;,
-            &quot;email&quot;: &quot;estrada.livia@example.com&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T23:04:48.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;
-        }
+        &quot;id&quot;: 3,
+        &quot;name&quot;: &quot;Rodrigo Leon&quot;,
+        &quot;email&quot;: &quot;estrada.livia@example.com&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-09-23T23:12:50.000000Z&quot;,
+        &quot;created_at&quot;: &quot;2026-09-23T23:12:50+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-09-23T23:12:50+00:00&quot;
     }
 }</code>
  </pre>
@@ -1644,7 +1631,7 @@ fetch(url, {
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: &quot;16&quot;,
+            &quot;id&quot;: &quot;17&quot;,
             &quot;type&quot;: {
                 &quot;value&quot;: &quot;deposit&quot;,
                 &quot;label&quot;: &quot;Dep&oacute;sito&quot;
@@ -1656,7 +1643,7 @@ fetch(url, {
                 &quot;value&quot;: &quot;completed&quot;,
                 &quot;label&quot;: &quot;Realizada&quot;
             },
-            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T23:12:50+00:00&quot;,
             &quot;counterparty&quot;: {
                 &quot;id&quot;: &quot;5&quot;,
                 &quot;code&quot;: &quot;106432&quot;,
@@ -1664,7 +1651,7 @@ fetch(url, {
             }
         },
         {
-            &quot;id&quot;: &quot;18&quot;,
+            &quot;id&quot;: &quot;19&quot;,
             &quot;type&quot;: {
                 &quot;value&quot;: &quot;deposit&quot;,
                 &quot;label&quot;: &quot;Dep&oacute;sito&quot;
@@ -1676,7 +1663,7 @@ fetch(url, {
                 &quot;value&quot;: &quot;completed&quot;,
                 &quot;label&quot;: &quot;Realizada&quot;
             },
-            &quot;created_at&quot;: &quot;2026-09-23T23:04:48+00:00&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T23:12:50+00:00&quot;,
             &quot;counterparty&quot;: {
                 &quot;id&quot;: &quot;8&quot;,
                 &quot;code&quot;: &quot;389368&quot;,

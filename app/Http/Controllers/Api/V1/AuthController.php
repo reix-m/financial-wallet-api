@@ -34,11 +34,9 @@ final class AuthController
         name: UserResource::class,
         model: User::class,
         additional: [
-            'meta' => [
-                'access_token' => '2|example-token',
-                'token_type' => 'Bearer',
-                'expiresAt' => '2026-09-22T14:32:12+00:00',
-            ],
+            'access_token' => '2|example-token',
+            'token_type' => 'Bearer',
+            'expiresAt' => '2026-09-22T14:32:12+00:00',
         ],
         status: SymfonyResponse::HTTP_CREATED,
         description: 'Success',
@@ -58,11 +56,9 @@ final class AuthController
 
         return UserResource::make($result->user)
             ->additional([
-                'meta' => [
-                    'access_token' => $result->accessToken,
-                    'token_type' => $result->tokenType,
-                    'expires_at' => $result->expiresAt->toAtomString(),
-                ],
+                'access_token' => $result->accessToken,
+                'token_type' => $result->tokenType,
+                'expires_at' => $result->expiresAt->toAtomString(),
             ])
             ->response()->setStatusCode(SymfonyResponse::HTTP_CREATED);
     }
@@ -91,11 +87,9 @@ final class AuthController
         name: UserResource::class,
         model: User::class,
         additional: [
-            'meta' => [
-                'access_token' => '2|example-token',
-                'token_type' => 'Bearer',
-                'expiresAt' => '2026-09-22T14:32:12+00:00',
-            ],
+            'access_token' => '2|example-token',
+            'token_type' => 'Bearer',
+            'expiresAt' => '2026-09-22T14:32:12+00:00',
         ],
         status: SymfonyResponse::HTTP_OK,
         description: 'Success',
@@ -118,11 +112,9 @@ final class AuthController
 
         return UserResource::make($result->user)
             ->additional([
-                'meta' => [
-                    'access_token' => $result->accessToken,
-                    'token_type' => $result->tokenType,
-                    'expires_at' => $result->expiresAt->toAtomString(),
-                ],
+                'access_token' => $result->accessToken,
+                'token_type' => $result->tokenType,
+                'expires_at' => $result->expiresAt->toAtomString(),
             ])
             ->response();
     }

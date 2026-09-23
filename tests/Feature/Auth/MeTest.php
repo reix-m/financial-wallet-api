@@ -17,7 +17,6 @@ it('can return authenticated user', function (): void {
     $this->withToken($token)
         ->getJson('/api/v1/auth/me')
         ->assertOk()
-        ->assertJsonPath('data.type', 'users')
-        ->assertJsonPath('data.id', (string) $user->id)
-        ->assertJsonPath('data.attributes.email', 'foo.bar@example.com');
+        ->assertJsonPath('data.id', $user->id)
+        ->assertJsonPath('data.email', 'foo.bar@example.com');
 });
