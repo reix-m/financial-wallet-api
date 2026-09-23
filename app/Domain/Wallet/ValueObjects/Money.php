@@ -57,4 +57,14 @@ final readonly class Money
     {
         return new self($this->cents + $other->toCents());
     }
+
+    public function isLessThan(Money $other): bool
+    {
+        return $this->cents < $other->toCents();
+    }
+
+    public function subtract(Money $other): self
+    {
+        return new self($this->cents - $other->toCents());
+    }
 }
