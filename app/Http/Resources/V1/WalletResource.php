@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Resources\V1;
 
 use App\Domain\Wallet\Wallet;
-use App\Support\AuditLog;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\JsonApi\JsonApiResource;
 

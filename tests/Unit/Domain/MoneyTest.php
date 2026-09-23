@@ -79,4 +79,3 @@ it('can add money', function (): void {
 
     expect($money->add(Money::fromCents(100))->toCents())->toBe(13340);
 });
-
