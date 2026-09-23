@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Domain\Wallet\Exceptions\InsufficientBalanceException;
 use App\Domain\Wallet\Exceptions\InvalidTransactionAmountException;
 use App\Domain\Wallet\Services\RandomWalletCodeGenerator;
 use App\Domain\Wallet\ValueObjects\Money;
@@ -106,4 +107,34 @@ it('can deposit positive amount', function (): void {
     $wallet->deposit(Money::fromCents(300));
 
     expect($wallet->getBalance()->toCents())->toBe(300);
+});
+
+it('cannot withdraw zero or negative amount', function (): void {
+    $codeGenerator = new RandomWalletCodeGenerator();
+    $wallet = Wallet::create(userId: 1, codeGenerator: $codeGenerator);
+    $exception = null;
+
+    try {
+        $wallet->withdraw(Money::fromCents(-300));
+    } catch (Exception $e) {
+        $exception = $e;
+    }
+
+    expect($exception)->not()->toBeNull();
+    expect($exception)->toBeInstanceOf(InvalidTransactionAmountException::class);
+});
+
+it('cannot withdraw without sufficient funds', function (): void {
+    $codeGenerator = new RandomWalletCodeGenerator();
+    $wallet = Wallet::create(userId: 1, codeGenerator: $codeGenerator, initialBalance: Money::fromCents(100));
+    $exception = null;
+
+    try {
+        $wallet->withdraw(Money::fromCents(3300));
+    } catch (Exception $e) {
+        $exception = $e;
+    }
+
+    expect($exception)->not()->toBeNull();
+    expect($exception)->toBeInstanceOf(InsufficientBalanceException::class);
 });
