@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Wallet;
 
 use App\Domain\Wallet\Contracts\WalletCodeGeneratorInterface;
+use App\Domain\Wallet\Exceptions\InsufficientBalanceException;
 use App\Domain\Wallet\Exceptions\InvalidTransactionAmountException;
 use App\Domain\Wallet\ValueObjects\Money;
 use App\Domain\Wallet\ValueObjects\WalletCode;
@@ -48,6 +49,19 @@ final class Wallet
         }
 
         $this->balance = $this->balance->add($amount);
+    }
+
+    public function withdraw(Money $amount): void
+    {
+        if ( ! $amount->isPositive()) {
+            throw new InvalidTransactionAmountException($this->code->getValue());
+        }
+
+        if ($this->balance->isLessThan($amount)) {
+            throw new InsufficientBalanceException($this->code->getValue());
+        }
+
+        $this->balance = $this->balance->subtract($amount);
     }
 
     public function getId(): ?int
