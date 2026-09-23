@@ -73,6 +73,7 @@ return [
             'wallets:store',
             'wallets:deposit',
             'wallets:transfer',
+            'wallets:show:my',
         ],
     ],
 

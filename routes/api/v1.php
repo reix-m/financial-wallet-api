@@ -20,4 +20,5 @@ Route::middleware(['auth:sanctum', 'throttle:authorized'])->group(function (): v
     Route::post('/wallets', [WalletController::class, 'store'])->middleware('abilities:wallets:store', 'verified')->name('v1.wallets.store');
     Route::post('/wallets/deposit', [WalletController::class, 'deposit'])->middleware('abilities:wallets:deposit', 'verified')->name('v1.wallets.deposit');
     Route::post('/wallets/transfer', [WalletController::class, 'transfer'])->middleware('abilities:wallets:transfer', 'verified')->name('v1.wallets.transfer');
+    Route::get('/wallets/my', [WalletController::class, 'showMy'])->middleware('abilities:wallets:show:my', 'verified')->name('v1.wallets.show.my');
 });
