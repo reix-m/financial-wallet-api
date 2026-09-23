@@ -122,7 +122,9 @@
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).&lt;/aside&gt;</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>This API is not authenticated.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_ACCESS_TOKEN}"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
+<p>Generate an access token sending a request to <code>POST /api/v1/auth/login</code>.</p>
 
         <h1 id="auth">Auth</h1>
 
@@ -190,9 +192,9 @@ fetch(url, {
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
             &quot;email&quot;: &quot;urias.erik@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T00:40:18.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T00:45:09.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T00:45:09+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T00:45:09+00:00&quot;
         }
     },
     &quot;meta&quot;: {
@@ -386,9 +388,9 @@ fetch(url, {
         &quot;attributes&quot;: {
             &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
             &quot;email&quot;: &quot;elaine.carvalho@example.org&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T00:40:18.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;
+            &quot;email_verified_at&quot;: &quot;2026-09-23T00:45:09.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T00:45:09+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T00:45:09+00:00&quot;
         }
     },
     &quot;meta&quot;: {
@@ -521,6 +523,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/v1/auth/me" \
+    --header "Authorization: Bearer {YOUR_ACCESS_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -531,6 +534,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_ACCESS_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -554,11 +558,11 @@ fetch(url, {
         &quot;id&quot;: &quot;3&quot;,
         &quot;type&quot;: &quot;users&quot;,
         &quot;attributes&quot;: {
-            &quot;name&quot;: &quot;Sr. Leo Mascarenhas&quot;,
-            &quot;email&quot;: &quot;willian32@example.com&quot;,
-            &quot;email_verified_at&quot;: &quot;2026-09-23T00:40:18.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;,
-            &quot;updated_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;
+            &quot;name&quot;: &quot;Rodrigo Leon&quot;,
+            &quot;email&quot;: &quot;estrada.livia@example.com&quot;,
+            &quot;email_verified_at&quot;: &quot;2026-09-23T00:45:09.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T00:45:09+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T00:45:09+00:00&quot;
         }
     }
 }</code>
@@ -620,6 +624,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/auth/me</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-auth-me"
+               value="Bearer {YOUR_ACCESS_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_ACCESS_TOKEN}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;

@@ -47,13 +47,13 @@ return [
         'csrf_url' => '/sanctum/csrf-cookie',
     ],
     'auth' => [
-        'enabled' => false,
+        'enabled' => true,
         'default' => false,
         'in' => AuthIn::BEARER->value,
-        'name' => 'key',
+        'name' => 'Authorization',
         'use_value' => env('SCRIBE_AUTH_KEY'),
-        'placeholder' => '{YOUR_AUTH_KEY}',
-        'extra_info' => 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.',
+        'placeholder' => '{YOUR_ACCESS_TOKEN}',
+        'extra_info' => 'Generate an access token sending a request to `POST /api/v1/auth/login`.',
     ],
     'example_languages' => [
         'bash',
