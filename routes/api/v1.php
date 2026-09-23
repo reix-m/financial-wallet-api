@@ -12,3 +12,8 @@ Route::prefix('auth')->controller(AuthController::class)->group(function (): voi
         ->middleware(['signed', 'throttle:6,1']);
     Route::post('/login', 'login')->middleware('throttle:auth-login')->name('v1.auth.login');
 });
+Route::middleware(['auth:sanctum', 'throttle:authorized'])->group(function (): void {
+    Route::get('/auth/me', [AuthController::class, 'me'])
+        ->middleware('abilities:auth:me')
+        ->name('v1.auth.me');
+});
