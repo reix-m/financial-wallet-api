@@ -37,4 +37,24 @@ final readonly class Money
     {
         return sprintf('%s %s', $currencySymbol, number_format($this->toFloat(), 2, ',', '.'));
     }
+
+    public function isNegative(): bool
+    {
+        return $this->cents < 0;
+    }
+
+    public function equals(Money $other): bool
+    {
+        return $this->cents === $other->toCents();
+    }
+
+    public function isPositive(): bool
+    {
+        return $this->cents > 0;
+    }
+
+    public function add(Money $other): self
+    {
+        return new self($this->cents + $other->toCents());
+    }
 }
