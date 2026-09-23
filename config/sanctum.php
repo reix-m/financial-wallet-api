@@ -72,6 +72,7 @@ return [
             'auth:tokens:delete',
             'wallets:store',
             'wallets:deposit',
+            'wallets:transfer',
         ],
     ],
 
