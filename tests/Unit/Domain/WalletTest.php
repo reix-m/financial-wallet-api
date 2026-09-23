@@ -73,11 +73,36 @@ it('cannot set already assigned id', function (): void {
     expect($exception)->toBeInstanceOf(InvalidArgumentException::class);
 });
 
-it('can set it', function (): void {
+it('can set id', function (): void {
     $codeGenerator = new RandomWalletCodeGenerator();
     $wallet = Wallet::create(userId: 1, codeGenerator: $codeGenerator);
 
     expect($wallet->getId())->toBeNull();
     $wallet->setId(10);
     expect($wallet->getId())->toBe(10);
+});
+
+it('cannot deposit zero or negative amount', function (): void {
+    $codeGenerator = new RandomWalletCodeGenerator();
+    $wallet = Wallet::create(userId: 1, codeGenerator: $codeGenerator);
+    $exception = null;
+
+    try {
+        $wallet->deposit(Money::fromCents(-300));
+    } catch (Exception $e) {
+        $exception = $e;
+    }
+
+    expect($exception)->not()->toBeNull();
+    expect($exception)->toBeInstanceOf(InvalidArgumentException::class);
+});
+
+it('cannot deposit positive amount', function (): void {
+    $codeGenerator = new RandomWalletCodeGenerator();
+    $wallet = Wallet::create(userId: 1, codeGenerator: $codeGenerator);
+    $exception = null;
+
+    $wallet->deposit(Money::fromCents(300));
+
+    expect($wallet->getBalance()->toCents())->toBe(300);
 });
