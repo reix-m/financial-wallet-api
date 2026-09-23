@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\Http\Middleware\CheckAbilities;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
@@ -20,6 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->alias([
+            'abilities' => CheckAbilities::class,
+        ]);
         $middleware->prependToGroup('api', AcceptJson::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

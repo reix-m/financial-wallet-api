@@ -28,5 +28,11 @@ final class AppServiceProvider extends ServiceProvider
         RateLimiter::for('auth-login', fn(Request $request) => [
             Limit::perMinute(10)->by(sprintf('%s|%s', $request->ip(), (string) $request->input('email'))),
         ]);
+
+        RateLimiter::for('authorized', fn (Request $request) => [
+            Limit::perMinute(60)->by(
+                (string) ($request->user()?->getAuthIdentifier() ?? $request->ip())
+            ),
+        ]);
     }
 }
