@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\WalletController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->controller(AuthController::class)->group(function (): void {
@@ -16,4 +17,5 @@ Route::middleware(['auth:sanctum', 'throttle:authorized'])->group(function (): v
     Route::get('/auth/me', [AuthController::class, 'me'])
         ->middleware('abilities:auth:me')
         ->name('v1.auth.me');
+    Route::post('/wallets', [WalletController::class, 'store'])->middleware('abilities:wallets:store', 'verified')->name('v1.wallets.store');
 });

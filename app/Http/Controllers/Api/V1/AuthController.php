@@ -81,7 +81,7 @@ final class AuthController
             return response()->json([], SymfonyResponse::HTTP_NO_CONTENT);
         }
 
-        return response()->json(['message' => "Verification failed. Hash{$input->hash}."], SymfonyResponse::HTTP_FORBIDDEN);
+        return response()->json(['message' => "Verification failed."], SymfonyResponse::HTTP_FORBIDDEN);
     }
 
     #[Subgroup(name: 'Authentication')]
