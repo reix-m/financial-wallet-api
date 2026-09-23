@@ -16,3 +16,17 @@ it('can create from cents', function (): void {
 
     expect($money->toCents())->toBe($cents);
 });
+
+it('can get float value', function (): void {
+    $cents = 1200050;
+    $money = Money::fromCents($cents);
+
+    expect($money->toFloat())->toBe(12000.50);
+});
+
+it('can get formatted value', function (): void {
+    $cents = 1200050;
+    $money = Money::fromCents($cents);
+
+    expect($money->formatted())->toBe('R$ 12.000,50');
+});
