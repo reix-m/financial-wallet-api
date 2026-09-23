@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 use App\Http\Middleware\AcceptJson;
+use App\Support\AuditLog;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,6 +15,7 @@ use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Sanctum\Http\Middleware\CheckAbilities;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -36,6 +40,8 @@ return Application::configure(basePath: dirname(__DIR__))
                 'message' => 'Too many requests.',
             ], Response::HTTP_TOO_MANY_REQUESTS);
 
+            AuditLog::log('http.rate_limit', []);
+
             $retryAfter = $exception->getHeaders()['Retry-After'] ?? null;
             if (null !== $retryAfter) {
                 $response->headers->set('Retry-After', (string) $retryAfter);
@@ -49,6 +55,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 return null;
             }
 
+            AuditLog::log('http.validation_failed', [
+                'exception' => $exception::class,
+            ]);
+
             return new JsonResponse([
                 'message' => 'Validation failed.',
                 'errors' => $exception->errors(),
@@ -60,8 +70,54 @@ return Application::configure(basePath: dirname(__DIR__))
                 return null;
             }
 
+            AuditLog::log('http.invalid_signature', [
+                'exception' => $exception::class,
+            ]);
+
             return new JsonResponse([
                 'message' => 'Invalid signature.',
             ], Response::HTTP_FORBIDDEN);
+        });
+
+        $exceptions->render(function (AuthorizationException $exception, Request $request): ?JsonResponse {
+            if ( ! $request->expectsJson()) {
+                return null;
+            }
+
+            AuditLog::log('auth.forbidden', [
+                'exception' => $exception::class,
+            ]);
+
+            return new JsonResponse([
+                'message' => 'Forbidden.',
+            ], Response::HTTP_FORBIDDEN);
+        });
+
+        $exceptions->render(function (AuthenticationException $exception, Request $request): ?JsonResponse {
+            if ( ! $request->expectsJson()) {
+                return null;
+            }
+
+            AuditLog::log('auth.unauthorized', [
+                'guard' => 'sanctum',
+            ]);
+
+            return new JsonResponse([
+                'message' => 'Unauthorized.',
+            ], Response::HTTP_UNAUTHORIZED);
+        });
+
+        $exceptions->render(function (HttpException $exception, Request $request): ?JsonResponse {
+            if ( ! $request->expectsJson()) {
+                return null;
+            }
+
+            AuditLog::log('http.exception', [
+                'exception' => $exception::class,
+            ]);
+
+            return new JsonResponse([
+                'message' => $exception->getMessage(),
+            ], $exception->getStatusCode());
         });
     })->create();
