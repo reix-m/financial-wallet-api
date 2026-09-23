@@ -21,7 +21,7 @@ final class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        RateLimiter::for('auth-register', fn (Request $request) => [
+        RateLimiter::for('auth-register', fn(Request $request) => [
             Limit::perMinute(10)->by($request->ip()),
         ]);
 
@@ -29,9 +29,9 @@ final class AppServiceProvider extends ServiceProvider
             Limit::perMinute(10)->by(sprintf('%s|%s', $request->ip(), (string) $request->input('email'))),
         ]);
 
-        RateLimiter::for('authorized', fn (Request $request) => [
+        RateLimiter::for('authorized', fn(Request $request) => [
             Limit::perMinute(60)->by(
-                (string) ($request->user()?->getAuthIdentifier() ?? $request->ip())
+                (string) ($request->user()?->getAuthIdentifier() ?? $request->ip()),
             ),
         ]);
     }
