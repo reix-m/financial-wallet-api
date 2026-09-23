@@ -30,3 +30,53 @@ it('can get formatted value', function (): void {
 
     expect($money->formatted())->toBe('R$ 12.000,50');
 });
+
+it('should return true when value is negative', function (): void {
+    $cents = -13240;
+    $money = Money::fromCents($cents);
+
+    expect($money->isNegative())->toBeTrue();
+});
+
+it('should return false when value is not negative', function (): void {
+    $cents = 13240;
+    $money = Money::fromCents($cents);
+
+    expect($money->isNegative())->toBeFalse();
+});
+
+it('should return true when values is equals', function (): void {
+    $cents = -13240;
+    $money = Money::fromCents($cents);
+
+    expect($money->equals(Money::fromCents($cents)))->toBeTrue();
+});
+
+it('should return false when values is not equals', function (): void {
+    $cents = 13240;
+    $money = Money::fromCents($cents);
+
+    expect($money->equals(Money::fromCents(13241)))->toBeFalse();
+});
+
+it('should return true when value is positive', function (): void {
+    $cents = 13240;
+    $money = Money::fromCents($cents);
+
+    expect($money->isPositive())->toBeTrue();
+});
+
+it('should return false when value is not positive', function (): void {
+    $cents = -13240;
+    $money = Money::fromCents($cents);
+
+    expect($money->isPositive())->toBeFalse();
+});
+
+it('can add money', function (): void {
+    $cents = 13240;
+    $money = Money::fromCents($cents);
+
+    expect($money->add(Money::fromCents(100))->toCents())->toBe(13340);
+});
+
