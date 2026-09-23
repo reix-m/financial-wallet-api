@@ -126,4 +126,14 @@ final class AuthController
             ])
             ->response();
     }
+
+    #[Subgroup(name: 'Authentication')]
+    #[Endpoint(title: 'Me', description: 'Return authenticated user.')]
+    #[Authenticated]
+    #[ResponseFromApiResource(name: UserResource::class, model: User::class, status: SymfonyResponse::HTTP_OK, description: 'Authenticated user.')]
+    #[Response(content: ['message' => 'Unauthorized.'], status: SymfonyResponse::HTTP_UNAUTHORIZED, description: 'Authentication failed.')]
+    public function me(Request $request, #[CurrentUser] User $user): JsonResponse
+    {
+        return UserResource::make($user)->response();
+    }
 }
