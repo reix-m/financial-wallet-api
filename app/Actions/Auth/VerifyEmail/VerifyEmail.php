@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Actions\Auth\VerifyEmail;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Verified;
 
 final class VerifyEmail
 {
@@ -17,6 +18,7 @@ final class VerifyEmail
 
         if ( ! $user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
+            event(new Verified($user));
         }
 
         return true;
