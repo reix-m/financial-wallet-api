@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Domain\Wallet\Exceptions\InvalidTransactionAmountException;
 use App\Domain\Wallet\Services\RandomWalletCodeGenerator;
 use App\Domain\Wallet\ValueObjects\Money;
 use App\Domain\Wallet\ValueObjects\WalletCode;
@@ -94,10 +95,10 @@ it('cannot deposit zero or negative amount', function (): void {
     }
 
     expect($exception)->not()->toBeNull();
-    expect($exception)->toBeInstanceOf(InvalidArgumentException::class);
+    expect($exception)->toBeInstanceOf(InvalidTransactionAmountException::class);
 });
 
-it('cannot deposit positive amount', function (): void {
+it('can deposit positive amount', function (): void {
     $codeGenerator = new RandomWalletCodeGenerator();
     $wallet = Wallet::create(userId: 1, codeGenerator: $codeGenerator);
     $exception = null;

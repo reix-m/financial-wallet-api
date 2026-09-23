@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Wallet;
 
 use App\Domain\Wallet\Contracts\WalletCodeGeneratorInterface;
+use App\Domain\Wallet\Exceptions\InvalidTransactionAmountException;
 use App\Domain\Wallet\ValueObjects\Money;
 use App\Domain\Wallet\ValueObjects\WalletCode;
 use Illuminate\Support\Carbon;
@@ -43,7 +44,7 @@ final class Wallet
     public function deposit(Money $amount): void
     {
         if ( ! $amount->isPositive()) {
-            throw new InvalidArgumentException('The deposit amount should be greater than zero.');
+            throw new InvalidTransactionAmountException($this->code->getValue());
         }
 
         $this->balance = $this->balance->add($amount);
