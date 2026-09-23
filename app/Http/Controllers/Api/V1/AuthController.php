@@ -38,7 +38,7 @@ final class AuthController
                 'access_token' => '2|example-token',
                 'token_type' => 'Bearer',
                 'expiresAt' => '2026-09-22T14:32:12+00:00',
-            ]
+            ],
         ],
         status: SymfonyResponse::HTTP_CREATED,
         description: 'Success',
@@ -95,7 +95,7 @@ final class AuthController
                 'access_token' => '2|example-token',
                 'token_type' => 'Bearer',
                 'expiresAt' => '2026-09-22T14:32:12+00:00',
-            ]
+            ],
         ],
         status: SymfonyResponse::HTTP_OK,
         description: 'Success',

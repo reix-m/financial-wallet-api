@@ -19,7 +19,7 @@ it('cannot authenticate with invalid email', function (): void {
 it('cannot authenticate with invalid password', function (): void {
     $user = User::factory()->create([
         'email' => 'foo.bar@example.com',
-        'password' => 'StrongP@ss123'
+        'password' => 'StrongP@ss123',
     ]);
     $response = $this->postJson('/api/v1/auth/login', [
         'email' => $user->email,
@@ -29,11 +29,10 @@ it('cannot authenticate with invalid password', function (): void {
     $response->assertUnauthorized();
 });
 
-it('can authenticate with valid email and password', function (): void
-{
+it('can authenticate with valid email and password', function (): void {
     $user = User::factory()->create([
         'email' => 'foo.bar@example.com',
-        'password' => 'StrongP@ss123'
+        'password' => 'StrongP@ss123',
     ]);
 
     $response = $this->postJson('/api/v1/auth/login', [
@@ -45,7 +44,7 @@ it('can authenticate with valid email and password', function (): void
         ->assertOk()
         ->assertJsonStructure([
             'data' => ['attributes' => ['name', 'email', 'email_verified_at', 'created_at', 'updated_at'], 'id', 'type'],
-            'meta' => ['access_token', 'token_type', 'expires_at']
+            'meta' => ['access_token', 'token_type', 'expires_at'],
         ])
         ->assertJsonPath('meta.token_type', 'Bearer')
         ->assertJsonPath('data.attributes.email', 'foo.bar@example.com');

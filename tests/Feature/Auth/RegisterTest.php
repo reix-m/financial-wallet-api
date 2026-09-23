@@ -22,7 +22,7 @@ it('register user successfully and return token', function (): void {
     $response
         ->assertJsonStructure([
             'data' => ['attributes' => ['name', 'email', 'email_verified_at', 'created_at', 'updated_at'], 'id', 'type'],
-            'meta' => ['access_token', 'token_type', 'expires_at']
+            'meta' => ['access_token', 'token_type', 'expires_at'],
         ])
         ->assertJsonPath('meta.token_type', 'Bearer')
         ->assertJsonPath('data.attributes.name', 'Foo Bar')
