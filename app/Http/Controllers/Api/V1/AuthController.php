@@ -10,10 +10,16 @@ use App\Actions\Auth\VerifyEmail\VerifyEmail;
 use App\Http\Requests\V1\Auth\LoginRequest;
 use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Http\Requests\V1\Auth\VerifyEmailRequest;
+use App\Http\Resources\V1\UserResource;
+use App\Models\User;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Response;
+use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 use Knuckles\Scribe\Attributes\Subgroup;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
@@ -24,16 +30,15 @@ final class AuthController
     #[Subgroup(name: 'Authentication')]
     #[Endpoint(title: 'Register', description: 'Create a new account.')]
     #[Unauthenticated]
-    #[Response(
-        content: [
-            'user' => [
-                'id' => 1,
-                'name' => 'Foo Bar',
-                'email' => 'foo.bar@example.com',
-            ],
-            'access_token' => '2|example-token',
-            'token_type' => 'Bearer',
-            'expiresAt' => '2026-09-22T14:32:12+00:00',
+    #[ResponseFromApiResource(
+        name: UserResource::class,
+        model: User::class,
+        additional: [
+            'meta' => [
+                'access_token' => '2|example-token',
+                'token_type' => 'Bearer',
+                'expiresAt' => '2026-09-22T14:32:12+00:00',
+            ]
         ],
         status: SymfonyResponse::HTTP_CREATED,
         description: 'Success',
@@ -51,16 +56,15 @@ final class AuthController
         $input = $request->toInput();
         $result = $register->execute($input);
 
-        return response()->json([
-            'user' => [
-                'id' => $result->user->id,
-                'name' => $result->user->name,
-                'email' => $result->user->email,
-            ],
-            'access_token' => $result->accessToken,
-            'token_type' => $result->tokenType,
-            'expires_at' => $result->expiresAt->toAtomString(),
-        ], SymfonyResponse::HTTP_CREATED);
+        return UserResource::make($result->user)
+            ->additional([
+                'meta' => [
+                    'access_token' => $result->accessToken,
+                    'token_type' => $result->tokenType,
+                    'expires_at' => $result->expiresAt->toAtomString(),
+                ],
+            ])
+            ->response()->setStatusCode(SymfonyResponse::HTTP_CREATED);
     }
 
     #[Subgroup(name: 'Email Verification')]
@@ -83,16 +87,15 @@ final class AuthController
     #[Subgroup(name: 'Authentication')]
     #[Endpoint(title: 'Login', description: 'Send valid username and password and receive a token.')]
     #[Unauthenticated]
-    #[Response(
-        content: [
-            'user' => [
-                'id' => 1,
-                'name' => 'Foo Bar',
-                'email' => 'foo.bar@example.com',
-            ],
-            'access_token' => '2|example-token',
-            'token_type' => 'Bearer',
-            'expiresAt' => '2026-09-22T14:32:12+00:00',
+    #[ResponseFromApiResource(
+        name: UserResource::class,
+        model: User::class,
+        additional: [
+            'meta' => [
+                'access_token' => '2|example-token',
+                'token_type' => 'Bearer',
+                'expiresAt' => '2026-09-22T14:32:12+00:00',
+            ]
         ],
         status: SymfonyResponse::HTTP_OK,
         description: 'Success',
@@ -113,15 +116,14 @@ final class AuthController
             return response()->json(['message' => 'Invalid credentials.'], SymfonyResponse::HTTP_UNAUTHORIZED);
         }
 
-        return response()->json([
-            'user' => [
-                'id' => $result->user->id,
-                'name' => $result->user->name,
-                'email' => $result->user->email,
-            ],
-            'access_token' => $result->accessToken,
-            'token_type' => $result->tokenType,
-            'expires_at' => $result->expiresAt->toAtomString(),
-        ], SymfonyResponse::HTTP_OK);
+        return UserResource::make($result->user)
+            ->additional([
+                'meta' => [
+                    'access_token' => $result->accessToken,
+                    'token_type' => $result->tokenType,
+                    'expires_at' => $result->expiresAt->toAtomString(),
+                ],
+            ])
+            ->response();
     }
 }
