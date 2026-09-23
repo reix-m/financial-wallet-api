@@ -79,3 +79,26 @@ it('can add money', function (): void {
 
     expect($money->add(Money::fromCents(100))->toCents())->toBe(13340);
 });
+
+it('should return true when value is less than other', function (): void {
+    $cents = 12340;
+    $money = Money::fromCents($cents);
+    $other = Money::fromCents($cents + 100);
+
+    expect($money->isLessThan($other))->toBeTrue();
+});
+
+it('should return false when value is not less than other', function (): void {
+    $cents = 12340;
+    $money = Money::fromCents($cents);
+    $other = Money::fromCents($cents - 100);
+
+    expect($money->isLessThan($other))->toBeFalse();
+});
+
+it('can subtract money', function (): void {
+    $cents = 13240;
+    $money = Money::fromCents($cents);
+
+    expect($money->subtract(Money::fromCents(100))->toCents())->toBe(13140);
+});
