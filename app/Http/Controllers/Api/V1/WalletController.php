@@ -7,11 +7,15 @@ namespace App\Http\Controllers\Api\V1;
 use App\Actions\Wallet\CreateWallet\CreateWallet;
 use App\Actions\Wallet\CreateWallet\CreateWalletInput;
 use App\Actions\Wallet\Deposit\Deposit;
+use App\Actions\Wallet\ListTransactions\ListTransactions;
 use App\Actions\Wallet\ShowMy\ShowMy;
 use App\Actions\Wallet\Transfer\Transfer;
 use App\Http\Requests\V1\Wallet\DepositRequest;
+use App\Http\Requests\V1\Wallet\ListTransactionsRequest;
 use App\Http\Requests\V1\Wallet\TransferRequest;
+use App\Http\Resources\V1\TransactionResource;
 use App\Http\Resources\V1\WalletResource;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
@@ -20,6 +24,7 @@ use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Response;
+use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
@@ -125,5 +130,24 @@ final class WalletController
         $result =  $showMy->execute($user->id);
 
         return WalletResource::make($result)->response()->setStatusCode(SymfonyResponse::HTTP_OK);
+    }
+
+    #[Endpoint(title: 'List Transactions', description: 'List your wallet transactions.')]
+    #[ResponseFromApiResource(
+        name: TransactionResource::class,
+        model: Transaction::class,
+        status: SymfonyResponse::HTTP_OK,
+        description: 'Success',
+        collection: true,
+        paginate: 15,
+        with: ['relatedTransaction.wallet.user'],
+    )]
+    #[Response(content: ['message' => 'The wallet was not found.'], status: SymfonyResponse::HTTP_NOT_FOUND, description: 'Wallet was not found.')]
+    public function index(ListTransactionsRequest $request, #[CurrentUser] User $user, ListTransactions $listTransactions): JsonResponse
+    {
+        $input = $request->toInput($user->id);
+        $transactions = $listTransactions->execute($input);
+
+        return TransactionResource::collection($transactions)->response();
     }
 }
