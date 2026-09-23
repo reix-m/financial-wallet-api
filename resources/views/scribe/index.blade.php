@@ -81,6 +81,9 @@
                                                                             <li class="tocify-item level-3" data-unique="auth-POSTapi-v1-auth-login">
                                             <a href="#auth-POSTapi-v1-auth-login">Login</a>
                                         </li>
+                                                                            <li class="tocify-item level-3" data-unique="auth-GETapi-v1-auth-me">
+                                            <a href="#auth-GETapi-v1-auth-me">Me</a>
+                                        </li>
                                                                     </ul>
                                                                                 <li class="tocify-item level-2" data-unique="auth-email-verification">
                                 <a href="#auth-email-verification">Email Verification</a>
@@ -101,7 +104,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: September 22, 2026</li>
+        <li>Last updated: September 23, 2026</li>
     </ul>
 </div>
 
@@ -181,14 +184,22 @@ fetch(url, {
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;user&quot;: {
-        &quot;id&quot;: 1,
-        &quot;name&quot;: &quot;Foo Bar&quot;,
-        &quot;email&quot;: &quot;foo.bar@example.com&quot;
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;3&quot;,
+        &quot;type&quot;: &quot;users&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
+            &quot;email&quot;: &quot;urias.erik@example.org&quot;,
+            &quot;email_verified_at&quot;: &quot;2026-09-23T00:40:18.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;
+        }
     },
-    &quot;access_token&quot;: &quot;2|example-token&quot;,
-    &quot;token_type&quot;: &quot;Bearer&quot;,
-    &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
+    &quot;meta&quot;: {
+        &quot;access_token&quot;: &quot;2|example-token&quot;,
+        &quot;token_type&quot;: &quot;Bearer&quot;,
+        &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
+    }
 }</code>
  </pre>
             <blockquote>
@@ -369,14 +380,22 @@ fetch(url, {
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;user&quot;: {
-        &quot;id&quot;: 1,
-        &quot;name&quot;: &quot;Foo Bar&quot;,
-        &quot;email&quot;: &quot;foo.bar@example.com&quot;
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;3&quot;,
+        &quot;type&quot;: &quot;users&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Sra. Malena Molina&quot;,
+            &quot;email&quot;: &quot;elaine.carvalho@example.org&quot;,
+            &quot;email_verified_at&quot;: &quot;2026-09-23T00:40:18.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;
+        }
     },
-    &quot;access_token&quot;: &quot;2|example-token&quot;,
-    &quot;token_type&quot;: &quot;Bearer&quot;,
-    &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
+    &quot;meta&quot;: {
+        &quot;access_token&quot;: &quot;2|example-token&quot;,
+        &quot;token_type&quot;: &quot;Bearer&quot;,
+        &quot;expiresAt&quot;: &quot;2026-09-22T14:32:12+00:00&quot;
+    }
 }</code>
  </pre>
             <blockquote>
@@ -486,6 +505,146 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>User password. Example: <code>StrongP@ss123</code></p>
         </div>
         </form>
+
+                    <h2 id="auth-GETapi-v1-auth-me">Me</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Return authenticated user.</p>
+
+<span id="example-requests-GETapi-v1-auth-me">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/v1/auth/me" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/auth/me"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-auth-me">
+            <blockquote>
+            <p>Example response (200, Authenticated user.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;3&quot;,
+        &quot;type&quot;: &quot;users&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Sr. Leo Mascarenhas&quot;,
+            &quot;email&quot;: &quot;willian32@example.com&quot;,
+            &quot;email_verified_at&quot;: &quot;2026-09-23T00:40:18.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-09-23T00:40:18+00:00&quot;
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthorized.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-auth-me" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-auth-me"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-auth-me"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-auth-me" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-auth-me">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-auth-me" data-method="GET"
+      data-path="api/v1/auth/me"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-auth-me', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-auth-me"
+                    onclick="tryItOut('GETapi-v1-auth-me');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-auth-me"
+                    onclick="cancelTryOut('GETapi-v1-auth-me');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-auth-me"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/auth/me</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-auth-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-auth-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
 
                                 <h2 id="auth-email-verification">Email Verification</h2>
                                                     <h2 id="auth-GETapi-v1-auth-email-verify--id---hash-">Verify Email</h2>

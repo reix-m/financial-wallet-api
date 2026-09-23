@@ -66,7 +66,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"user":{"id":1,"name":"Foo Bar","email":"foo.bar@example.com"},"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}'
+        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Sra. Malena Molina","email":"urias.erik@example.org","email_verified_at":"2026-09-23T00:40:18.000000Z","created_at":"2026-09-23T00:40:18+00:00","updated_at":"2026-09-23T00:40:18+00:00"}},"meta":{"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}}'
         headers: []
         description: Success
       -
@@ -224,7 +224,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"user":{"id":1,"name":"Foo Bar","email":"foo.bar@example.com"},"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}'
+        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Sra. Malena Molina","email":"elaine.carvalho@example.org","email_verified_at":"2026-09-23T00:40:18.000000Z","created_at":"2026-09-23T00:40:18+00:00","updated_at":"2026-09-23T00:40:18+00:00"}},"meta":{"access_token":"2|example-token","token_type":"Bearer","expiresAt":"2026-09-22T14:32:12+00:00"}}'
         headers: []
         description: Success
       -
@@ -233,6 +233,49 @@ endpoints:
         content: '{"message":"Invalid credentials."}'
         headers: []
         description: 'Validation failed'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/auth/me
+    metadata:
+      custom: []
+      groupName: Auth
+      groupDescription: ''
+      subgroup: Authentication
+      subgroupDescription: ''
+      title: Me
+      description: 'Return authenticated user.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"3","type":"users","attributes":{"name":"Sr. Leo Mascarenhas","email":"willian32@example.com","email_verified_at":"2026-09-23T00:40:18.000000Z","created_at":"2026-09-23T00:40:18+00:00","updated_at":"2026-09-23T00:40:18+00:00"}}}'
+        headers: []
+        description: 'Authenticated user.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
     responseFields: []
     auth: []
     controller: null
