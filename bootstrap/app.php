@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Domain\Wallet\Exceptions\InvalidTransactionAmountException;
+use App\Domain\Wallet\Exceptions\WalletDomainException;
+use App\Domain\Wallet\Exceptions\WalletNotFoundException;
 use App\Http\Middleware\AcceptJson;
 use App\Support\AuditLog;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -119,5 +122,23 @@ return Application::configure(basePath: dirname(__DIR__))
             return new JsonResponse([
                 'message' => $exception->getMessage(),
             ], $exception->getStatusCode());
+        });
+
+        $exceptions->render(function (WalletDomainException $exception) {
+            $statusCode = match (true) {
+                $exception instanceof WalletNotFoundException => Response::HTTP_NOT_FOUND,
+                $exception instanceof InvalidTransactionAmountException => Response::HTTP_UNPROCESSABLE_ENTITY,
+                default => Response::HTTP_BAD_REQUEST,
+            };
+
+            AuditLog::log('wallet.transaction.failed', [
+                'exception' => $exception::class,
+                'identifier' => $exception->identifier,
+            ]);
+
+            return response()->json([
+                'error' => class_basename($exception),
+                'message' => $exception->getMessage(),
+            ], $statusCode);
         });
     })->create();
