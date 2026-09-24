@@ -21,7 +21,7 @@ final class CounterpartyResource extends JsonResource
         return [
             'id' => (string) $wallet->id,
             'code' => $wallet->code,
-            'user_name' => $wallet->user?->name ?? 'Usuário do Sistema',
+            'user_name' => $wallet->user->name ?? 'Usuário do Sistema',
         ];
     }
 }

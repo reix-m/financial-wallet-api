@@ -25,14 +25,7 @@ final class ListTransactions
 
         return Transaction::query()
             ->where('wallet_id', $wallet->id)
-            ->with([
-                'counterpartyWallet' => function ($query): void {
-                    $query->select('wallets.id', 'user_id', 'code')
-                        ->with(['user' => function ($userQuery): void {
-                            $userQuery->select('id', 'name', 'email');
-                        }]);
-                },
-            ])
+            ->forListing()
             ->orderBy('created_at', 'desc')
             ->paginate($input->perPage);
     }

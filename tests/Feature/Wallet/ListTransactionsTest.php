@@ -54,9 +54,9 @@ it('can list transactions', function (): void {
         ->assertJsonPath('data.0.status.value', $transferTransaction->status)
         ->assertJsonPath('data.0.type.value', $transferTransaction->type)
         ->assertJsonPath('data.0.amount', $transferTransaction->amount->toCents())
-        ->assertJsonPath('data.0.is_credit', false)
+        ->assertJsonPath('data.0.direction', 'debit')
         ->assertJsonPath('data.1.status.value', $depositTransaction->status)
         ->assertJsonPath('data.1.type.value', $depositTransaction->type)
         ->assertJsonPath('data.1.amount', $depositTransaction->amount->toCents())
-        ->assertJsonPath('data.1.is_credit', true);
+        ->assertJsonPath('data.1.direction', 'credit');
 });

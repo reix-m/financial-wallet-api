@@ -23,18 +23,22 @@ final class TransactionResource extends JsonResource
         /** @var TransactionType $type */
         $type = $transaction->type;
 
-        $counterpartyWallet = $transaction->relatedTransaction?->wallet;
+        $isReversal = TransactionType::REVERSAL === $type;
+        $counterpartyWallet = $isReversal ? null : $transaction->counterpartyWallet;
 
         return [
-            'id' => (string) $transaction->id,
+            'id' => $transaction->id,
             'type' => $this->parseType($type),
-            'is_credit' => $type->isCredit(),
+            'direction' => $this->parseDirection($transaction),
             'amount' => $transaction->amount->toCents(),
             'formatted_amount' => $transaction->amount->formatted(),
             'status' => $this->parseStatus($transaction->status),
             'created_at' => $transaction->created_at?->toAtomString(),
             'counterparty' => null !== $counterpartyWallet
                 ? CounterpartyResource::make($counterpartyWallet)
+                : null,
+            'reversed_transaction' => $isReversal && null !== $transaction->relatedTransaction
+                ? TransactionResource::make($transaction->relatedTransaction)
                 : null,
         ];
     }
@@ -61,5 +65,20 @@ final class TransactionResource extends JsonResource
             TransactionType::TRANSFER_IN => ['value' => $type->value, 'label' => 'Transferência Recebida'],
             TransactionType::REVERSAL => ['value' => $type->value, 'label' => 'Estorno'],
         };
+    }
+
+    private function parseDirection(Transaction $transaction): string
+    {
+        if (TransactionType::REVERSAL !== $transaction->type) {
+            return $transaction->type->isCredit() ? 'credit' : 'debit';
+        }
+
+        $originalType = $transaction->relatedTransaction?->type;
+
+        if (null === $originalType) {
+            return 'debit';
+        }
+
+        return $originalType->isCredit() ? 'debit' : 'credit';
     }
 }
