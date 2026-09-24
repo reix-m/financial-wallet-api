@@ -24,6 +24,14 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Sanctum\Http\Middleware\CheckAbilities;
+use Square1\LaravelIdempotency\Exceptions\CorruptedCacheDataException;
+use Square1\LaravelIdempotency\Exceptions\DuplicateRequestException;
+use Square1\LaravelIdempotency\Exceptions\InvalidCachedValueException;
+use Square1\LaravelIdempotency\Exceptions\InvalidConfigurationException;
+use Square1\LaravelIdempotency\Exceptions\LockWaitExceededException;
+use Square1\LaravelIdempotency\Exceptions\MismatchedPathException;
+use Square1\LaravelIdempotency\Exceptions\MissingIdempotencyKeyException;
+use Square1\LaravelIdempotency\Http\Middleware\IdempotencyMiddleware;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
@@ -37,6 +45,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'abilities' => CheckAbilities::class,
+            'idempotent' => IdempotencyMiddleware::class,
         ]);
         $middleware->prependToGroup('api', AcceptJson::class);
         $middleware->prependToGroup('api', SetRequestId::class);
@@ -166,6 +175,32 @@ return Application::configure(basePath: dirname(__DIR__))
             ]);
 
             return response()->json([
+                'error' => class_basename($exception),
+                'message' => $exception->getMessage(),
+            ], $statusCode);
+        });
+
+        $exceptions->render(function (Throwable $exception, Request $request): ?JsonResponse {
+            $statusCode = match ($exception::class) {
+                MissingIdempotencyKeyException::class => Response::HTTP_BAD_REQUEST,
+                MismatchedPathException::class => Response::HTTP_UNPROCESSABLE_ENTITY,
+                DuplicateRequestException::class,
+                LockWaitExceededException::class => Response::HTTP_CONFLICT,
+                CorruptedCacheDataException::class,
+                InvalidCachedValueException::class,
+                InvalidConfigurationException::class => Response::HTTP_INTERNAL_SERVER_ERROR,
+                default => null,
+            };
+
+            if (null === $statusCode || ! $request->expectsJson()) {
+                return null;
+            }
+
+            AuditLog::log('http.idempotency', [
+                'exception' => $exception::class,
+            ]);
+
+            return new JsonResponse([
                 'error' => class_basename($exception),
                 'message' => $exception->getMessage(),
             ], $statusCode);

@@ -18,9 +18,9 @@ Route::middleware(['auth:sanctum', 'throttle:authorized'])->group(function (): v
         ->middleware('abilities:auth:me')
         ->name('v1.auth.me');
     Route::post('/wallets', [WalletController::class, 'store'])->middleware('abilities:wallets:store', 'verified')->name('v1.wallets.store');
-    Route::post('/wallets/deposit', [WalletController::class, 'deposit'])->middleware('abilities:wallets:deposit', 'verified')->name('v1.wallets.deposit');
-    Route::post('/wallets/transfer', [WalletController::class, 'transfer'])->middleware('abilities:wallets:transfer', 'verified')->name('v1.wallets.transfer');
+    Route::post('/wallets/deposit', [WalletController::class, 'deposit'])->middleware('abilities:wallets:deposit', 'verified', 'idempotent')->name('v1.wallets.deposit');
+    Route::post('/wallets/transfer', [WalletController::class, 'transfer'])->middleware('abilities:wallets:transfer', 'verified', 'idempotent')->name('v1.wallets.transfer');
     Route::get('/wallets/my', [WalletController::class, 'showMy'])->middleware('abilities:wallets:show:my', 'verified')->name('v1.wallets.show.my');
     Route::get('/wallets/transactions', [WalletController::class, 'index'])->middleware('abilities:wallets:transactions:index', 'verified')->name('v1.wallets.transactions.index');
-    Route::post('/wallets/transactions/{transaction_id}/revert', [WalletController::class, 'revert'])->middleware('abilities:wallets:transactions:revert', 'verified')->name('v1.wallets.transaction.revert');
+    Route::post('/wallets/transactions/{transaction_id}/revert', [WalletController::class, 'revert'])->middleware('abilities:wallets:transactions:revert', 'verified', 'idempotent')->name('v1.wallets.transaction.revert');
 });
