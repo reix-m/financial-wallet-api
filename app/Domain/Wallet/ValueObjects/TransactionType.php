@@ -18,4 +18,12 @@ enum TransactionType: string
             default => false,
         };
     }
+
+    public function isTransfer(): bool
+    {
+        return match ($this) {
+            self::TRANSFER_OUT, self::TRANSFER_IN => true,
+            default => false,
+        };
+    }
 }
