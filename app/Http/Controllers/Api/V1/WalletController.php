@@ -8,10 +8,12 @@ use App\Actions\Wallet\CreateWallet\CreateWallet;
 use App\Actions\Wallet\CreateWallet\CreateWalletInput;
 use App\Actions\Wallet\Deposit\Deposit;
 use App\Actions\Wallet\ListTransactions\ListTransactions;
+use App\Actions\Wallet\RevertTransaction\RevertTransaction;
 use App\Actions\Wallet\ShowMy\ShowMy;
 use App\Actions\Wallet\Transfer\Transfer;
 use App\Http\Requests\V1\Wallet\DepositRequest;
 use App\Http\Requests\V1\Wallet\ListTransactionsRequest;
+use App\Http\Requests\V1\Wallet\RevertTransactionRequest;
 use App\Http\Requests\V1\Wallet\TransferRequest;
 use App\Http\Resources\V1\TransactionResource;
 use App\Http\Resources\V1\WalletResource;
@@ -137,5 +139,26 @@ final class WalletController
         $transactions = $listTransactions->execute($input);
 
         return TransactionResource::collection($transactions)->response();
+    }
+
+    #[Endpoint(title: 'Revert transaction', description: 'Revert a transaction.')]
+    #[Response(
+        status: SymfonyResponse::HTTP_OK,
+        description: 'Success.',
+        content: [
+            'data' => [
+                'id' => '1',
+                'code' => '123456',
+                'balance' => 'R$ 1,00',
+                'created_at' => '2026-09-23T14:00:00+00:00',
+            ],
+        ],
+    )]
+    public function revert(RevertTransactionRequest $request, #[CurrentUser] User $user, RevertTransaction $revertTransaction): JsonResponse
+    {
+        $input = $request->toInput(userId: $user->id);
+        $result =  $revertTransaction->execute($input);
+
+        return WalletResource::make($result)->response();
     }
 }
