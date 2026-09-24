@@ -81,6 +81,18 @@ Detalhes completos em http://localhost:8000/docs (Scribe) ou via `php artisan sc
 - Reversão gera uma transação de estorno e atualiza o status da original.
 - E-mails de carteira exigem verificação (`verified`); tokens carregam abilities por endpoint.
 
+## Idempotência
+
+As operações que movimentam saldo (`deposit`, `transfer` e `revert`) aceitam o
+header `Idempotency-Key`. Repetir a requisição com a mesma chave devolve a resposta
+original sem reprocessar (a resposta de replay traz o header `Idempotency-Relayed`).
+As chaves são escopadas por usuário e ficam em cache por 24h.
+
+O header é opcional para manter compatibilidade, mas o cliente oficial sempre envia
+um UUID por operação (reusado em retries). Erros de idempotência retornam JSON:
+`MismatchedPathException` (422) quando a chave é reutilizada em outra rota e
+`DuplicateRequestException`/`LockWaitExceededException` (409).
+
 ## Arquitetura
 
 - `app/Http/Controllers/Api/V1` — controllers finos
