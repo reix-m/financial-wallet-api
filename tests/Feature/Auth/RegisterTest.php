@@ -21,12 +21,12 @@ it('register user successfully and return token', function (): void {
     $response->assertCreated();
     $response
         ->assertJsonStructure([
-            'data' => ['attributes' => ['name', 'email', 'email_verified_at', 'created_at', 'updated_at'], 'id', 'type'],
-            'meta' => ['access_token', 'token_type', 'expires_at'],
+            'data' => ['name', 'email', 'email_verified_at', 'created_at', 'updated_at'],
+            'access_token', 'token_type', 'expires_at',
         ])
-        ->assertJsonPath('meta.token_type', 'Bearer')
-        ->assertJsonPath('data.attributes.name', 'Foo Bar')
-        ->assertJsonPath('data.attributes.email', 'foo.bar@example.com');
+        ->assertJsonPath('token_type', 'Bearer')
+        ->assertJsonPath('data.name', 'Foo Bar')
+        ->assertJsonPath('data.email', 'foo.bar@example.com');
 
     $user = User::query()->where('email', 'foo.bar@example.com')->first();
 

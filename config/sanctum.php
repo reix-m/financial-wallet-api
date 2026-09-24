@@ -70,6 +70,12 @@ return [
             'auth:verification:send',
             'auth:tokens:read',
             'auth:tokens:delete',
+            'wallets:store',
+            'wallets:deposit',
+            'wallets:transfer',
+            'wallets:show:my',
+            'wallets:transactions:index',
+            'wallets:transactions:revert',
         ],
     ],
 

@@ -11,14 +11,16 @@ use App\Support\AuditLog;
 
 final class CreateWallet
 {
-    public function execute(CreateWalletInput $input): ?Wallet
+    public function execute(CreateWalletInput $input): Wallet
     {
-        if (WalletModel::query()->where('user_id', $input->userId)->exists()) {
+        /** @var ?WalletModel  $userWallet */
+        $userWallet = WalletModel::query()->where('user_id', $input->userId)->first();
+        if (null !== $userWallet) {
             AuditLog::log('wallet.create.failed', [
                 'user_id' => (int) $input->userId,
                 'reason' => 'already_exists',
             ]);
-            return null;
+            return $userWallet->toDomainEntity();
         }
 
         $codeGenerator = new RandomWalletCodeGenerator();

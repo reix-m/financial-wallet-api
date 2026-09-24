@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Domain\Wallet;
 
 use App\Domain\Wallet\Contracts\WalletCodeGeneratorInterface;
+use App\Domain\Wallet\Exceptions\InsufficientBalanceException;
+use App\Domain\Wallet\Exceptions\InvalidTransactionAmountException;
 use App\Domain\Wallet\ValueObjects\Money;
 use App\Domain\Wallet\ValueObjects\WalletCode;
 use Illuminate\Support\Carbon;
@@ -38,6 +40,50 @@ final class Wallet
             code: $codeGenerator->generate(),
             balance: $initialBalance,
         );
+    }
+
+    public function deposit(Money $amount): void
+    {
+        if ( ! $amount->isPositive()) {
+            throw new InvalidTransactionAmountException($this->code->getValue());
+        }
+
+        $this->balance = $this->balance->add($amount);
+    }
+
+    public function withdraw(Money $amount): void
+    {
+        if ( ! $amount->isPositive()) {
+            throw new InvalidTransactionAmountException($this->code->getValue());
+        }
+
+        if ($this->balance->isLessThan($amount)) {
+            throw new InsufficientBalanceException($this->code->getValue());
+        }
+
+        $this->balance = $this->balance->subtract($amount);
+    }
+
+    public function revertCredit(Money $amount): void
+    {
+        if ( ! $amount->isPositive()) {
+            throw new InvalidTransactionAmountException($this->code->getValue());
+        }
+
+        $this->balance = $this->balance->subtract($amount);
+    }
+
+    public function compensate(Transaction $transaction): void
+    {
+        if ($transaction->getWalletId() !== $this->id) {
+            throw new InvalidArgumentException('The transaction does not belong to this wallet.');
+        }
+
+        if ($transaction->getType()->isCredit()) {
+            $this->revertCredit($transaction->getAmount());
+        } else {
+            $this->deposit($transaction->getAmount());
+        }
     }
 
     public function getId(): ?int

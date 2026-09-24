@@ -1,0 +1,87 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: financial-wallet-api
+    container_name: financial-wallet-api
+    restart: unless-stopped
+    working_dir: /var/www/html
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: financial-wallet-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: financial_wallet
+      POSTGRES_USER: financial_wallet
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U financial_wallet -d financial_wallet"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: financial-wallet-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: financial-wallet-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  web:
+    profiles: ["web"]
+    build:
+      context: ../financial-wallet-web
+      dockerfile: Dockerfile
+    image: financial-wallet-web
+    container_name: financial-wallet-web
+    restart: unless-stopped
+    working_dir: /app
+    command: yarn dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../financial-wallet-web:/app
+      - web-node-modules:/app/node_modules
+    environment:
+      VITE_PROXY_TARGET: http://app:8000
+    depends_on:
+      - app
+
+volumes:
+  postgres-data:
+  redis-data:
+  web-node-modules:

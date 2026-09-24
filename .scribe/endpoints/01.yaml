@@ -1,0 +1,417 @@
+name: Wallet
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/wallets
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create wallet'
+      description: 'Return created wallet.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data":{"id":"1","code":"123456","balance":"R$ 0,00","created_at":"2026-09-23T14:00:00+00:00"}}'
+        headers: []
+        description: Success.
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/wallets/deposit
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: Deposit
+      description: 'Deposits an amount into wallet.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      amount:
+        custom: []
+        name: amount
+        description: 'Amount to deposit.'
+        required: true
+        example: 132500
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      amount: 132500
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"1","code":"123456","balance":"R$ 1,00","created_at":"2026-09-23T14:00:00+00:00"}}'
+        headers: []
+        description: Success.
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+      -
+        custom: []
+        status: 404
+        content: '{"message":"The wallet was not found."}'
+        headers: []
+        description: 'Wallet was not found.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/wallets/transfer
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: Transfer
+      description: 'Transfer a amount to another wallet.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      target_account_code:
+        custom: []
+        name: target_account_code
+        description: 'Target account to send transfer.'
+        required: true
+        example: '213431'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      amount:
+        custom: []
+        name: amount
+        description: 'Amount to transfer.'
+        required: true
+        example: 132500
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      target_account_code: '213431'
+      amount: 132500
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"1","code":"123456","balance":"R$ 1,00","created_at":"2026-09-23T14:00:00+00:00"}}'
+        headers: []
+        description: Success.
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+      -
+        custom: []
+        status: 404
+        content: '{"message":"The wallet was not found."}'
+        headers: []
+        description: 'Wallet was not found.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/wallets/transactions/{transaction_id}/revert'
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Revert transaction'
+      description: 'Revert a transaction.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      transaction_id:
+        custom: []
+        name: transaction_id
+        description: 'The ID of the transaction.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      transaction_id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      transaction_id:
+        custom: []
+        name: transaction_id
+        description: ''
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      transaction_id: 16
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"1","code":"123456","balance":"R$ 1,00","created_at":"2026-09-23T14:00:00+00:00"}}'
+        headers: []
+        description: Success.
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/wallets/my
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show My'
+      description: 'Show my wallet information.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"1","code":"123456","balance":"R$ 1,00","created_at":"2026-09-23T14:00:00+00:00"}}'
+        headers: []
+        description: Success.
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+      -
+        custom: []
+        status: 404
+        content: '{"message":"The wallet was not found."}'
+        headers: []
+        description: 'Wallet was not found.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/wallets/transactions
+    metadata:
+      custom: []
+      groupName: Wallet
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List Transactions'
+      description: 'List your wallet transactions.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_ACCESS_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      per_page:
+        custom: []
+        name: per_page
+        description: 'Transactions per page.'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanQueryParameters:
+      per_page: 15
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":15,"type":{"value":"deposit","label":"Dep\u00f3sito"},"direction":"credit","amount":10000,"formatted_amount":"R$ 100,00","status":{"value":"completed","label":"Realizada"},"created_at":"2026-09-24T04:06:30+00:00","counterparty":{"id":"5","code":"106432","user_name":"Dr. Martinho da Rosa"},"reversed_transaction":null},{"id":17,"type":{"value":"deposit","label":"Dep\u00f3sito"},"direction":"credit","amount":10000,"formatted_amount":"R$ 100,00","status":{"value":"completed","label":"Realizada"},"created_at":"2026-09-24T04:06:30+00:00","counterparty":{"id":"8","code":"389368","user_name":"Hor\u00e1cio Breno Padilha"},"reversed_transaction":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthorized."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Your email address is not verified."}'
+        headers: []
+        description: 'Email is not verified.'
+      -
+        custom: []
+        status: 404
+        content: '{"message":"The wallet was not found."}'
+        headers: []
+        description: 'Wallet was not found.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
