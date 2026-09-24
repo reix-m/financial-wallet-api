@@ -29,7 +29,7 @@ final class Transfer
                 ->keyBy(fn($wallet) => $wallet->code);
 
             /** @var ?WalletModel $senderModel */
-            $senderModel = $wallets->first(fn($w) => $w->id === $input->userId);
+            $senderModel = $wallets->first(fn($w) => $w->user_id === $input->userId);
             /** @var ?WalletModel $receiverModel */
             $receiverModel = $wallets->first(fn($w) => $w->code === $input->targetAccountCode);
 
