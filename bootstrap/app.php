@@ -12,6 +12,7 @@ use App\Domain\Wallet\Exceptions\TransactionNotFoundException;
 use App\Domain\Wallet\Exceptions\WalletDomainException;
 use App\Domain\Wallet\Exceptions\WalletNotFoundException;
 use App\Http\Middleware\AcceptJson;
+use App\Http\Middleware\SetRequestId;
 use App\Support\AuditLog;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -38,6 +39,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'abilities' => CheckAbilities::class,
         ]);
         $middleware->prependToGroup('api', AcceptJson::class);
+        $middleware->prependToGroup('api', SetRequestId::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (TooManyRequestsHttpException $exception, Request $request): ?JsonResponse {
