@@ -75,6 +75,7 @@ return [
             'wallets:transfer',
             'wallets:show:my',
             'wallets:transactions:index',
+            'wallets:transactions:revert',
         ],
     ],
 

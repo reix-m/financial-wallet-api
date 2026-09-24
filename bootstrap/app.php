@@ -2,9 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Domain\Wallet\Exceptions\CannotRevertTransactionException;
 use App\Domain\Wallet\Exceptions\CannotTransferToSelfException;
 use App\Domain\Wallet\Exceptions\InsufficientBalanceException;
 use App\Domain\Wallet\Exceptions\InvalidTransactionAmountException;
+use App\Domain\Wallet\Exceptions\TransactionAlreadyReversedException;
+use App\Domain\Wallet\Exceptions\TransactionDomainException;
+use App\Domain\Wallet\Exceptions\TransactionNotFoundException;
 use App\Domain\Wallet\Exceptions\WalletDomainException;
 use App\Domain\Wallet\Exceptions\WalletNotFoundException;
 use App\Http\Middleware\AcceptJson;
@@ -132,6 +136,25 @@ return Application::configure(basePath: dirname(__DIR__))
                 $exception instanceof InvalidTransactionAmountException => Response::HTTP_UNPROCESSABLE_ENTITY,
                 $exception instanceof CannotTransferToSelfException => Response::HTTP_UNPROCESSABLE_ENTITY,
                 $exception instanceof InsufficientBalanceException => Response::HTTP_UNPROCESSABLE_ENTITY,
+                default => Response::HTTP_BAD_REQUEST,
+            };
+
+            AuditLog::log('wallet.transaction.failed', [
+                'exception' => $exception::class,
+                'identifier' => $exception->identifier,
+            ]);
+
+            return response()->json([
+                'error' => class_basename($exception),
+                'message' => $exception->getMessage(),
+            ], $statusCode);
+        });
+
+        $exceptions->render(function (TransactionDomainException $exception) {
+            $statusCode = match (true) {
+                $exception instanceof TransactionNotFoundException => Response::HTTP_NOT_FOUND,
+                $exception instanceof CannotRevertTransactionException => Response::HTTP_UNPROCESSABLE_ENTITY,
+                $exception instanceof TransactionAlreadyReversedException => Response::HTTP_UNPROCESSABLE_ENTITY,
                 default => Response::HTTP_BAD_REQUEST,
             };
 
