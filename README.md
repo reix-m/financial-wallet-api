@@ -14,18 +14,18 @@ autenticação por token (Sanctum), **PostgreSQL** e **Redis**.
 
 ## Subindo o ambiente
 
-Com Docker, a partir da raiz do projeto:
+Com Docker, a partir de `financial-wallet-api/`:
 
 ```bash
-docker compose up -d                 # api + web + postgres + redis + mailpit
+docker compose up -d                 # api + postgres + redis + mailpit
 docker compose exec app php artisan migrate --seed
 ```
 
-Ou apenas a API (com infraestrutura), a partir de `financial-wallet-api/`:
+Para subir também o front (profile `web`; requer o repositório
+`financial-wallet-web` como pasta irmã):
 
 ```bash
-docker compose up -d
-docker compose exec app php artisan migrate --seed
+docker compose --profile web up -d   # + front em http://localhost:3000
 ```
 
 Sem Docker:

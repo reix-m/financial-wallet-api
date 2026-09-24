@@ -61,6 +61,27 @@ services:
       - "1025:1025"
       - "8025:8025"
 
+  web:
+    profiles: ["web"]
+    build:
+      context: ../financial-wallet-web
+      dockerfile: Dockerfile
+    image: financial-wallet-web
+    container_name: financial-wallet-web
+    restart: unless-stopped
+    working_dir: /app
+    command: yarn dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../financial-wallet-web:/app
+      - web-node-modules:/app/node_modules
+    environment:
+      VITE_PROXY_TARGET: http://app:8000
+    depends_on:
+      - app
+
 volumes:
   postgres-data:
   redis-data:
+  web-node-modules:
