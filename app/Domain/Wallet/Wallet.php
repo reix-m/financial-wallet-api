@@ -64,6 +64,28 @@ final class Wallet
         $this->balance = $this->balance->subtract($amount);
     }
 
+    public function revertCredit(Money $amount): void
+    {
+        if ( ! $amount->isPositive()) {
+            throw new InvalidTransactionAmountException($this->code->getValue());
+        }
+
+        $this->balance = $this->balance->subtract($amount);
+    }
+
+    public function compensate(Transaction $transaction): void
+    {
+        if ($transaction->getWalletId() !== $this->id) {
+            throw new InvalidArgumentException('The transaction does not belong to this wallet.');
+        }
+
+        if ($transaction->getType()->isCredit()) {
+            $this->revertCredit($transaction->getAmount());
+        } else {
+            $this->deposit($transaction->getAmount());
+        }
+    }
+
     public function getId(): ?int
     {
         return $this->id;
